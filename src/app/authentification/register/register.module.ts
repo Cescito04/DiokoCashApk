@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
+import { IdVerificationOverlayComponent } from '../../id-verification-overlay/id-verification-overlay.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { RegisterPage } from './register.page';
     RegisterPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage, IdVerificationOverlayComponent]
 })
 export class RegisterPageModule {}

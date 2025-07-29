@@ -43,7 +43,7 @@ export class AuthService{
             
             'Authorization': 'Bearer ' + token
           })
-            return this.http.get(`${this.url}/check` , {headers})
+        return this.http.get(`${this.url}/check` , {headers})
     }
 
     update(data: User){

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
+import { IdVerificationOverlayComponent } from '../../id-verification-overlay/id-verification-overlay.component';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,8 @@ export class RegisterPage implements OnInit {
   class_pays;
   pays = "sn";
   indicatif = 221;
+  showIdVerification = false;
+  
   constructor(private auth: AuthService,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
@@ -136,8 +139,14 @@ export class RegisterPage implements OnInit {
           localStorage.removeItem('token');
           if (data['token']) {
             localStorage.setItem('token',data['token']);
-            loading.dismiss();
-            this.etape = 2;            
+            
+            // Récupérer et sauvegarder les données utilisateur
+            this.auth.check_auth().subscribe((user: any) => {
+              localStorage.setItem('user', JSON.stringify(user));
+              loading.dismiss();
+              // Afficher le popup de vérification d'identité après inscription réussie
+              this.showIdVerification = true;
+            });
           } else{
             const toast = await this.toastCtrl.create({message: data['message'], duration : 3000 , color: 'dark'});
             toast.present();
@@ -150,6 +159,12 @@ export class RegisterPage implements OnInit {
           loading.dismiss();
         }
       );
+  }
+
+  closeIdVerification() {
+    this.showIdVerification = false;
+    // Naviguer vers la page d'accueil après fermeture du popup
+    this.router.navigateByUrl('/home');
   }
 
 

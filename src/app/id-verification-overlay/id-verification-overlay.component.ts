@@ -47,6 +47,14 @@ export class IdVerificationOverlayComponent {
         this.loading = false;
         this.idCardFile = null;
         this.selfieFile = null;
+        
+        // Mettre à jour le statut utilisateur localement pour éviter que le popup réapparaisse
+        const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+        if (currentUser) {
+          currentUser.status = 'pending_id_review';
+          localStorage.setItem('user', JSON.stringify(currentUser));
+        }
+        
         setTimeout(() => {
           this.closeOverlay();
         }, 2000);
