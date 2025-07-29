@@ -1,0 +1,189 @@
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.overlay-backdrop.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-popup {
+  background: var(--ion-background-color, #fff);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: popupSlideIn 0.3s ease;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.overlay-header {
+  background: var(--ion-color-primary, #3880ff);
+  color: var(--ion-color-primary-contrast, #fff);
+  padding: 16px 20px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+}
+
+.overlay-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.overlay-icon {
+  font-size: 1.6rem;
+  margin-right: 8px;
+  color: var(--ion-color-primary-contrast, #fff);
+}
+
+.overlay-close {
+  background: none;
+  border: none;
+  color: var(--ion-color-primary-contrast, #fff);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.overlay-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.overlay-content {
+  padding: 20px;
+}
+
+.overlay-instructions {
+  text-align: center;
+  color: var(--ion-color-medium, #666);
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.overlay-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.overlay-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--ion-text-color, #333);
+  background: var(--ion-item-background, #f6f8fa);
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+  min-height: 50px;
+}
+
+.overlay-label:hover {
+  background: var(--ion-color-light-tint, #e8f0fe);
+}
+
+.overlay-label-icon {
+  font-size: 1.4rem;
+  color: var(--ion-color-primary, #3880ff);
+}
+
+.overlay-file {
+  margin-left: 8px;
+  flex: 1;
+  font-size: 0.8rem;
+}
+
+.overlay-submit {
+  width: 100%;
+  background: linear-gradient(90deg, var(--ion-color-primary, #3880ff) 60%, var(--ion-color-secondary, #4bcffa) 100%);
+  color: var(--ion-color-primary-contrast, #fff);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(56, 128, 255, 0.08);
+  min-height: 44px;
+}
+
+.overlay-submit:hover:not([disabled]) {
+  background: linear-gradient(90deg, var(--ion-color-primary-shade, #2563eb) 60%, var(--ion-color-secondary-tint, #38bdf8) 100%);
+  box-shadow: 0 4px 16px rgba(56, 128, 255, 0.12);
+}
+
+.overlay-submit[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.overlay-error {
+  color: var(--ion-color-danger, #e74c3c);
+  background: var(--ion-color-danger-tint, #fdecea);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.overlay-success {
+  color: var(--ion-color-success, #27ae60);
+  background: var(--ion-color-success-tint, #eafaf1);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 500px) {
+  .overlay-popup {
+    width: 300px;
+    max-height: 75vh;
+  }
+  
+  .overlay-title {
+    font-size: 1rem;
+  }
+  
+  .overlay-icon {
+    font-size: 1.4rem;
+  }
+} 

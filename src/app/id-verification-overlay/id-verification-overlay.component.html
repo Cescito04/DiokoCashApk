@@ -1,0 +1,45 @@
+<div class="overlay-backdrop" 
+     [class.visible]="isVisible" 
+     (click)="onBackdropClick($event)">
+  
+  <div class="overlay-popup" *ngIf="isVisible">
+    <!-- Header -->
+    <div class="overlay-header">
+      <div class="overlay-title">
+        <ion-icon name="shield-checkmark-outline" class="overlay-icon"></ion-icon>
+        Vérification d'identité
+      </div>
+      <button class="overlay-close" (click)="closeOverlay()">
+        Fermer
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="overlay-content">
+      <div class="overlay-instructions">
+        <p>Pour sécuriser votre compte, merci de fournir une pièce d'identité <b>et</b> un selfie.</p>
+      </div>
+      
+      <div class="overlay-form">
+        <label class="overlay-label">
+          <ion-icon name="card-outline" class="overlay-label-icon"></ion-icon>
+          CNI (jpeg, png, jpg, pdf)
+          <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardChange($event)" class="overlay-file" />
+        </label>
+        
+        <label class="overlay-label">
+          <ion-icon name="person-circle-outline" class="overlay-label-icon"></ion-icon>
+          Selfie (jpeg, png, jpg)
+          <input type="file" accept=".jpeg,.jpg,.png" (change)="onSelfieChange($event)" class="overlay-file" />
+        </label>
+        
+        <div *ngIf="errorMsg" class="overlay-error">{{ errorMsg }}</div>
+        <div *ngIf="successMsg" class="overlay-success">{{ successMsg }}</div>
+        
+        <button (click)="submit()" [disabled]="loading" class="overlay-submit">
+          {{ loading ? 'Envoi en cours...' : 'Soumettre' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

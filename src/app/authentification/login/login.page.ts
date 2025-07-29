@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController, ModalController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
-import { IdVerificationModalComponent } from '../../id-verification-modal/id-verification-modal.component';
+import { IdVerificationOverlayComponent } from '../../id-verification-overlay/id-verification-overlay.component';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +11,7 @@ import { IdVerificationModalComponent } from '../../id-verification-modal/id-ver
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  showIdVerification = false;
 
   constructor(private auth: AuthService,
     private loadingCtrl: LoadingController,
@@ -48,12 +49,9 @@ password: new FormControl('', [Validators.required]),
         localStorage.setItem('token',data['token']);
         // Vérifier le statut utilisateur
         this.auth.check_auth().subscribe(async (user: any) => {
-          if (user.status && user.status !== 'id_verified') {
-            const modal = await this.modalCtrl.create({
-              component: IdVerificationModalComponent
-            });
-            await modal.present();
-            this.router.navigateByUrl('/');
+          if (user.status !== 'id_verified') {
+            this.showIdVerification = true;
+            // Ne pas naviguer immédiatement, attendre que l'utilisateur ferme l'overlay
           } else {
             this.router.navigateByUrl('/');
           }
@@ -67,4 +65,9 @@ password: new FormControl('', [Validators.required]),
     );
   }
 
+  closeIdVerification() {
+    this.showIdVerification = false;
+    // Naviguer après avoir fermé l'overlay
+    this.router.navigateByUrl('/');
+  }
 }

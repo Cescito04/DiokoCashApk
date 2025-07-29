@@ -9,12 +9,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IdVerificationModalComponent } from './id-verification-modal/id-verification-modal.component';
+import { IdVerificationOverlayComponent } from './id-verification-overlay/id-verification-overlay.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    IdVerificationModalComponent
+    IdVerificationModalComponent,
+    IdVerificationOverlayComponent
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, NgxDatatableModule],

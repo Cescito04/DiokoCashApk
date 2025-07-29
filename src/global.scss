@@ -39,3 +39,99 @@
     font-weight: normal;
     src: url('./assets/fonts/avnr.otf');
   }
+
+/* Styles pour la modale de vérification d'identité */
+.id-verification-modal {
+  --height: auto !important;
+  --width: 320px !important;
+  --max-width: 90vw !important;
+  --max-height: 80vh !important;
+  --border-radius: 16px !important;
+  --backdrop-opacity: 0.6 !important;
+  
+  /* Forcer le centrage complet */
+  .modal-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    padding: 20px !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000 !important;
+  }
+  
+  /* Forcer la modal en popup */
+  ion-modal {
+    --height: auto !important;
+    --width: 320px !important;
+    --max-width: 90vw !important;
+    --max-height: 80vh !important;
+    --border-radius: 16px !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    display: block !important;
+    z-index: 1001 !important;
+    bottom: auto !important;
+    right: auto !important;
+  }
+  
+  /* Supprimer les styles de sheet modal */
+  .modal-wrapper ion-modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    bottom: auto !important;
+    right: auto !important;
+    width: 320px !important;
+    height: auto !important;
+    max-height: 80vh !important;
+  }
+  
+  .modal-shadow {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2) !important;
+  }
+  
+  /* Forcer l'affichage du contenu */
+  ion-content {
+    --padding-start: 0 !important;
+    --padding-end: 0 !important;
+    --padding-top: 0 !important;
+    --padding-bottom: 0 !important;
+    height: auto !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Style du backdrop */
+  .modal-backdrop {
+    opacity: 0.6 !important;
+  }
+  
+  /* Supprimer les animations de slide */
+  .modal-wrapper {
+    animation: none !important;
+  }
+  
+  ion-modal {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .id-verification-modal {
+    --width: 300px !important;
+    --max-height: 75vh !important;
+    
+    ion-modal {
+      width: 300px !important;
+      max-height: 75vh !important;
+    }
+  }
+}
