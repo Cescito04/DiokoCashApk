@@ -1,0 +1,266 @@
+<ion-content class="" >
+  <ion-img src="assets/hand-swipe.gif" style="position: absolute;margin-top: 60%;width: 60vw;;right: 20vw;z-index: 100;opacity: 0.8;" *ngIf="hand==1 || hand==2"></ion-img>
+  <ion-img src="assets/Chargement.gif" style="position: absolute;width: 25vw;  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);z-index: 1000;" *ngIf="loader==true"></ion-img>
+  <div class="container" style="filter: {{loader == false ? null : 'blur(3px)' }}">
+    <div class="menu" [class]="class1">
+      <ion-img class="histo" src="assets/MENU/box.png" (click)="retrait()"></ion-img>
+      <ion-img class="share" src="assets/MENU/share.png" (click)="copy()"></ion-img>
+      
+    </div>
+
+    <div class="sub-menu">
+      <div style="width: 100%; height: 35vh;background-color: aliceblue;border-radius: 30px;margin-top: 10px;padding-top: 20px;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+      
+        <div class="in-sub">
+          <ion-row>
+            <ion-col size="10" style="text-align: center;vertical-align: middle;height: 100%;padding-left: 25px;{{ class_solde }}">
+              <span class="text-in"><b style="font-size: 40px;" *ngIf="class_solde == null">........</b> <b *ngIf="class_solde != null">{{solde | number : fractionSize}} F</b></span>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon name="eye-off-sharp" *ngIf="class_solde != null" style="font-size: 30px;color: #2A4791;margin-top: 40%;" expand="block" (click)="set_class_solde()"></ion-icon>
+              <ion-icon name="eye" *ngIf="class_solde == null" style="font-size: 30px;color: #2A4791;margin-top: 40%;" expand="block" (click)="set_class_solde()"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+       
+       
+        <div class="in-sub" style="margin-top: 40px;">
+        <ion-row>
+          <ion-col size="10" style="text-align: center;vertical-align: middle;height: 100%;padding-left: 25px;padding-top: 25px;">
+            <span class="text-in">Affiliés: {{affilie | number : fractionSize}}</span>
+          </ion-col>
+
+          <ion-col size="2">
+            <ion-icon name="eye" style="font-size: 30px;color: #2A4791;margin-top: 40%;" expand="block" (click)="list_affilie()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        </div>
+
+        <ion-row>
+          <ion-col size="9"></ion-col>
+          <ion-col size="3">   <ion-icon name="information-circle-sharp" style="font-size: 40px;color: #2A4791;margin-top: 40%;" expand="block" (click)="infos()"></ion-icon>
+          </ion-col>
+        </ion-row>
+        
+      </div>
+
+    </div>
+  </div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Affiliations</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod">DIOKO fait une redistribution d’une partie de ses bénéfices à ses clients en proposant un service permettant aux utilisateurs de gagner des commissions par le partage de l’application.
+                  L’affiliation est le nom donné à ce service; les parrains DIOKO auront à gagner jusqu’à
+                  1 000 000 FCFA sur chaque personne affiliée.
+                  Le nombre d’affiliés permis est illimité.
+                  1 affilié égal potentiellement 1 000 000 FCFA que le parrain aura à gagner.
+                  DIOKO veux créer une nouvelle dimension de la finance en proposant divers services pour faciliter les transactions.
+                  L’affiliation est une connexion entre DIOKO est ses utilisateurs privilégiés qui, en plus d’être clients, gagnent aussi une partie des commissions.</span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"><span class="text_mod-in">Dioko, Na nu DIOKO</span></span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Fermer</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal #UpdateModal trigger="update_modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Mise à jour</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Une nouvelle mise à jour est disponible ! </span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Cliquez sur "Télécharger" pour l'obtenir </span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button href="https://play.google.com/store/apps/details?id=diokocash.app.transfert" target="_blank" shape="round" class="button-content_at">Télécharger</ion-button>
+       <!--    <ion-button href="https://apps.apple.com/sn/app/dioko-by-jotali/id1662145626?l=fr" target="_blank" shape="round" class="button-content_at">Télécharger</ion-button>
+        --> </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal #ListAffilier trigger="ListAffilier">
+    <ng-template>
+      <div style="height: auto;max-height: 80vh;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre" >Mes Affiliés</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: auto">
+          <div class="detail_modal2" *ngFor="let affilies of affilies; let i = index" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col">
+                <span class="text_mod2"><b style="color: #EE7160;">{{i+1}})</b> {{ affilies['numero'] }} <b style="color: #EE7160;">=></b> {{affilies['apport'] | number : fractionSize}} F</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal #RetraitModal trigger="RetraitModal">
+    <ng-template>
+      <div style="height: auto;max-height: 80vh;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre" >Retrait Commission</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: auto" (click)="out()">
+          
+          <div class="parent2 parent">
+            <div class="text2">
+            <h4>Choix Wallet à Créditer</h4>
+          </div>
+          <div class="choix2 choix">
+      
+            <ion-row *ngIf="hideitem_2 == false" class="row_champ">
+              <ion-col size="2" (click)="choix_pays_c()">
+                <img class="icon_pays" *ngIf="pays_c=='sn'" src="assets/senegal.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='civ'" src="assets/ivoire.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='ml'" src="assets/mali.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='bj'" src="assets/benin.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='tg'" src="assets/togo.png" alt="">
+              </ion-col>
+              <ion-col size="2"><img class="icon_champ"  src="{{ logo_2 }}" alt="" (click)="choix_2()"></ion-col>
+              <ion-col size="6" class="wal_t2" (click)="choix_2()">{{ service_2 }}</ion-col>
+              <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt="" (click)="choix_2()"></ion-col>
+            </ion-row>
+      
+            <ion-row *ngIf="hideitem_2 == true" class="row_champ">
+              <ion-col size="2" (click)="choix_pays_c()">
+                <img class="icon_pays" *ngIf="pays_c=='sn'" src="assets/senegal.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='civ'" src="assets/ivoire.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='ml'" src="assets/mali.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='bj'" src="assets/benin.png" alt="">
+                <img class="icon_pays" *ngIf="pays_c=='tg'" src="assets/togo.png" alt="">
+              </ion-col>
+              <ion-col size="8" class="wal_t2" (click)="choix_2()">
+                <span class="wal_text"> Wallet à Créditer</span>
+              </ion-col>
+              <ion-col size="2" (click)="choix_2()"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+            </ion-row>
+            <div class="choix-content2 choix-content {{ class_content2 }}">
+            
+                <ion-row class="row1">
+                  <ion-col size="4" *ngFor="let pc of list_pays_c">
+                    <img class="icon_om" src="{{pc.logo}}" (click)="selectItem_2(pc.service,pc.logo,pc.color)" alt="">
+                  </ion-col>
+                </ion-row>
+              
+            </div>
+      
+      
+            <div class="choix-pays_c choix-content-p {{ class_pays_c }}">
+              <div class="row-pays" (click)="selectPays_c('sn')">
+                <img class="im-pays" src="assets/senegal.png" alt="">
+                <span class="col-text">SN (+221)</span>
+              </div>
+              <hr>
+              <div class="row-pays" (click)="selectPays_c('bj')" >
+                <img class="im-pays" src="assets/benin.png" alt="">
+                <span class="col-text">BJ (+229)</span>
+              </div>
+              <hr>
+              <div class="row-pays" (click)="selectPays_c('civ')" >
+                <img class="im-pays" src="assets/ivoire.png" alt="">
+                <span class="col-text">CI (+225)</span>
+              </div>
+              <hr hidden>  
+              <div class="row-pays-l" (click)="selectPays_c('ml')" hidden>
+                <img class="im-pays" src="assets/mali.png" alt="">
+                <span class="col-text">ML (+223)</span>
+              </div>
+              <hr>
+              <div class="row-pays-l" (click)="selectPays_c('tg')" >
+                <img class="im-pays" src="assets/togo.png" alt="">
+                <span class="col-text">TG (+228)</span>
+              </div>
+              <hr>         
+          </div>
+          </div>
+        </div> 
+          
+
+        <span class="label">Numéro de téléphone</span>
+        <div class="item" style="margin-bottom: 10px;">
+          <ion-row>
+            <ion-col size="12">
+              <ion-input type="text" pattern="[0-9]*" inputmode="numeric" placeholder="Numéro téléphone" [(ngModel)]="beneficiaire"></ion-input>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <span class="label">Montant</span>
+        <div class="item" style="margin-bottom: 10px;">
+          <ion-row>
+            <ion-col size="12">
+              <ion-input type="text" pattern="[0-9]*" inputmode="numeric" placeholder="Montant" [(ngModel)]="montant"></ion-input>
+            </ion-col>
+          </ion-row>
+        </div>
+        <span class="label-solde">Maximum à retirer :{{solde | number : fractionSize}} F</span>
+
+        <div class="button">
+          <ion-button shape="round" class="button-content" type="submit" (click)="retirer()" [disabled]="service_2 == null || montant < 200 || beneficiaire == null">Retirer</ion-button>
+        </div>
+          
+        </div>
+
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "Dioko",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
+ 

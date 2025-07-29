@@ -1,0 +1,104 @@
+<ion-content class="">
+  <ion-img src="assets/hand-swipe.gif" style="position: absolute;margin-top: 60%;width: 60vw;;right: 20vw;z-index: 100;opacity: 0.8;" *ngIf="hand==1 || hand==2"></ion-img>
+  <div class="container">
+    <div class="menu" [class]="class1">
+      <ion-img class="histo" src="assets/MENU/Historique_icon.png" [routerLink]="['/historique']"></ion-img>
+      <ion-img class="reglage" src="assets/MENU/Parametres_icon.png" [routerLink]="['/reglage']"></ion-img>
+      
+    </div>
+
+    <div class="sub-menu">
+      <ion-row>
+        <ion-col size="6">
+          <ion-img src="assets/MENU/11.png" *ngIf="country=='sn'" [routerLink]="['/multiple']"></ion-img>
+          <ion-img src="assets/MENU/11.png" *ngIf="country !='sn'" (click)="indispo()"></ion-img>
+        </ion-col>
+        <ion-col size="6">
+          <ion-img src="assets/MENU/22.png" [routerLink]="['/home-conversion']"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-img src="assets/MENU/11B.png" [routerLink]="['/factures']"></ion-img>
+        </ion-col>
+        <ion-col size="6">
+          <ion-img src="assets/MENU/22B.png" *ngIf="country=='sn'" [routerLink]="['/credit']"></ion-img>
+          <ion-img src="assets/MENU/22B.png" *ngIf="country !='sn'" (click)="indispo()"></ion-img>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Message</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Validez votre compte en contactant notre support par WhatsApp au <span class="text_mod-in">+221 76 261 74 03</span> pour faire des transactions. </span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod">Vous pouvez aussi cliquer directement sur <span class="text_mod-in">"contacter"</span> pour nous contacter. </span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <!-- <ion-button href="https://api.whatsapp.com/message/GOT3AT5BUJGKA1?autoload=1&app_absent=0" target="_blank" shape="round" class="button-content_aj">Contacter</ion-button>
+           --><ion-button href="https://wa.me/message/GOT3AT5BUJGKA1" target="_blank" shape="round" class="button-content_aj">Contacter</ion-button>
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Fermer</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal #UpdateModal trigger="update_modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Mise à jour</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Une nouvelle mise à jour est disponible ! </span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Cliquez sur "Télécharger" pour l'obtenir </span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+              <ion-button href="https://play.google.com/store/apps/details?id=diokocash.app.transfert" target="_blank" shape="round" class="button-content_at">Télécharger</ion-button>
+        <!--       <ion-button href="https://apps.apple.com/sn/app/dioko-by-jotali/id1662145626?l=fr" target="_blank" shape="round" class="button-content_at">Télécharger</ion-button>
+         -->  </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+
+</ion-content>

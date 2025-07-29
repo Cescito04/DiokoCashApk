@@ -1,0 +1,459 @@
+
+
+.container {
+    height: 100vh;
+    width: 100%;
+    min-height: 700px;
+    display: block;
+    background-image: url(/assets/MENU/Background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow-y: auto;   
+}
+
+@keyframes tesss {
+    from {height: 57vh;}
+    to {height: 62vh;}
+  }
+
+  .tesss{
+    animation-name: tesss;
+    animation-duration: 1s;
+  }
+  
+
+.menu {
+    height: 62vh;
+    width: 100%;
+    display: block;
+    background-image: url(/assets/home2/Affiliate.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.illustration {
+    width: 70%;
+    height: auto;
+  position: absolute;
+  top: 32%;
+  left: 12%;
+}
+
+
+.sub-menu {
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 8%;
+    height: 38vh;
+    width: 84%;
+    display: block;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.illustration {
+    width: 70%;
+    height: auto;
+  position: absolute;
+  top: 32%;
+  left: 12%;
+}
+
+.transfert {
+    width: 70%;
+    height: 70%;
+}
+
+.conversion {
+    width: 65%;
+    height: 65%;
+}
+
+.facture {
+        width: 65%;
+        height: 65%;
+        
+}
+
+.credit{
+        width: 60%;
+        height: 60%;
+}
+
+.histo {
+    width: 50px;
+    margin-left: 30px;
+    padding-top: 36px;
+}
+
+.share {
+    width: 70px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 30px;
+    padding-top: 45px;
+}
+
+.cadre {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.c1{
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.c2{
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.c3{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.c4{
+    margin-top: 15px;
+    margin-left: 40px;
+}
+
+h6{
+    --ion-font-family:  'ariblk'!important;
+    font-family:  'ariblk' !important;
+    color:white !important;
+    font-size: 14px;
+}
+
+
+  ion-modal{
+    --height: auto;
+
+    --width: 80%;
+    --border-radius: 20px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .trait{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .le_trait{
+    width: 50%;
+    border: 1px solid #EE7160;
+  }
+
+  .titre{
+    color: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 18px;
+  }
+
+  .detail_modal{
+    width: 80%;
+    margin-left: 10%;
+    height: auto;
+    background-color: white;
+    border-radius: 40px;
+
+  }
+
+  .detail_modal2{
+    width: 80%;
+    margin-left: 10%;
+    height: auto;
+    background-color: rgba(238,113,96,0.1);
+    border-radius: 40px;
+    text-align: center;
+  
+  }
+
+  .text_mod{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 14px;
+  }
+
+  .text_mod2{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 16px;
+  }
+  .text_mod-in{
+    color: #EE7160;
+  }
+
+  .button_m{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  .button-content_aj {
+    color: white !important;
+    --background: green;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: auto;
+    font-size: 18px;
+    text-transform: none;
+  }
+
+  .button-content_at {
+    color: white !important;
+    --background: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: auto;
+    font-size: 18px;
+    text-transform: none;
+  }
+  .button-content_a {
+    color: white !important;
+    --background: red;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: auto;
+    font-size: 18px;
+    text-transform: none;
+  }
+
+
+
+  .affiliation_menu{
+    position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+    color: white !important;
+          --ion-font-family:  'avnext'!important;
+          font-family:  'avnext' !important;
+          font-size: 18px;
+  }
+
+
+  .in-sub {
+    width: 90%;
+    margin-left: 5%; 
+    height: 25%;
+    background-color: rgba(238,113,96,0.3); 
+    border-radius: 25px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+
+  .text-in {
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 22px;
+    color:  #2A4791;
+  }
+
+  .parent2{
+    z-index: 10;
+    margin-top: -40px;
+   }
+
+   .parent {
+    position: relative;
+  }
+
+  .text2{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .choix {
+    position: relative;
+    background-color: white;
+    color: #2A4791;
+    width: 96%;
+    margin-left: 2%;
+    height: 60px;
+    padding-top: 14px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 32px;
+    border: 3px solid #EE7160;
+    z-index: initial;
+  }
+
+  .row_champ{
+    margin-top: -4px;
+   }
+   
+   .icon_champ{
+     margin-top: -9px;
+     margin-left: 40%;
+   }
+   
+   .icon_pays{
+     margin-top: -5px;
+     margin-left: 30%;
+     width: 75%;
+   }
+   .icon_fleche{
+     width: 20px;
+     margin-right: 15px;
+     margin-top: 7px;
+   }
+
+   .wal_text{
+    font-size: 16px;
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+  }
+  
+  .wal_t2{
+   padding-top: 9px;
+  }
+  
+  @media (min-device-width: 320px) and (max-device-width: 369px) { 
+    .wal_text{
+      font-size: 13px;
+    }
+  
+  
+  }
+
+  .choix-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    padding-top: 50px;
+    border-radius: 30px;
+    background-color: #EE7160;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .row1{
+    margin-top: 20px;
+  }
+
+  .icon_om{
+    width: 110px;
+    margin-top: -10px;
+  }
+  
+  .icon_free{
+    width: 110px;
+    padding-bottom: 10px;
+    padding-top: 0px;
+  }
+  
+  .icon_wave{
+    width: 80px;
+  } 
+  
+
+  .choix-content-p {
+    display: none;
+    position: absolute;
+    top: 0;
+    padding-top: 75px;
+    border-radius: 20px;
+    background-color: #EE7160;
+    width: auto;
+    z-index: -1;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .row-pays{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+  }
+
+  .col-text{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 16px;
+  }
+  .im-pays{
+    width: 25px;
+    margin-top: -5px;
+    margin-right: 7px;
+  }
+
+  .vide{
+    display: block;
+  }  
+  
+  .label{
+    font-size: 16px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .label-solde{
+    font-size: 16px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #EE7160;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  .item{
+    background-color: white;
+    border: 3px solid #EE7160;
+    border-radius: 40px;
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 55px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  ion-input{
+    font-size: 20px;
+    margin-top: 3px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791 !important;
+    margin-top: -1px;
+  }
+
+  .button{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .button-content {
+    color: white !important;
+    --background: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: 96%;
+    font-size: 16px;
+    text-transform: none;
+  }

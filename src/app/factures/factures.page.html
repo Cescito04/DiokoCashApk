@@ -1,0 +1,610 @@
+<ion-content class="">
+
+  <div class="container" (click)="out()">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']" *ngIf="vu==1"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" (click)="set_vu(1)" *ngIf="vu==2"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" (click)="set_vu(2)" *ngIf="vu==3"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']" *ngIf="vu==4"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']" *ngIf="vu==5"></ion-img>
+     <div class="div-span">
+<!--       <span class="span-top">Achat <br> de <b class="text-blue"> Crédit </b> <br> téléphonique</span> -->
+     </div>
+    </div>
+
+    <div class="sub-menu" *ngIf="vu==1">
+
+      <div class="parent">
+        <div class="text">
+        <h4>Choisissez le service</h4>
+      </div>
+      <div class="choix">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/Lsi_.png" (click)="operateur('Tawfeex')" [class]="expresso" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/woyofal.png" (click)="operateur('woyofal')" [class]="orange" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/senelec.png" (click)="operateur('senelec')" [class]="free" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/seneau.png" (click)="operateur('seneau')" [class]="free" alt="">
+          </ion-col>
+       <!--    <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/campusen.png" (click)="operateur('campusen')" [class]="expresso" alt="">
+          </ion-col> -->
+        </ion-row>
+      </div>
+    </div>
+
+    <form [formGroup]="myform">
+  <div class="validation" *ngIf="service != null && service != 'Tawfeex'">
+
+    <span class="label">N° Compteur {{service}}</span>
+    <div class="item">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon_com" src="assets/LOGO/{{logo_service}}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="text" minlength="11" maxlength="11" formControlName="tel" [(ngModel)]="tel"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="label">Montant</span>
+    <div class="item">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon2" src="assets/MENU-CONVERSION/pocket.png" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="number" formControlName="montant" [(ngModel)]="montant"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="set_vu(2)" [disabled]="myform.invalid || numero_service == null || montant == null" >Suivant</ion-button>
+    </div>
+  </div>
+
+  <div class="validation" *ngIf="service != null && service == 'Tawfeex'">
+
+    <span class="label">Prénoms & Nom</span>
+    <div class="item">
+      <ion-row>
+      
+        <ion-col size="12">
+          <ion-input type="text" formControlName="nom" [(ngModel)]="nom"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="label">Numéro Téléphone</span>
+    <div class="item">
+      <ion-row>
+   <!--      <ion-col size="2">
+          <img class="icon2" src="assets/MENU-CONVERSION/pocket.png" alt="">
+        </ion-col> -->
+        <ion-col size="12">
+          <ion-input type="text" pattern="[0-9]*" inputmode="numeric" minlength="7" maxlength="10" formControlName="numero_service" [(ngModel)]="numero_service"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="label">Code Parrainage (Optionnel)</span>
+    <div class="item">
+      <ion-row>
+        <ion-col size="12">
+          <ion-input type="text" id="parrain" pattern="[0-9]*" inputmode="numeric" minlength="4" placeholder="0000" maxlength="4" formControlName="parrain"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="set_vu(2)" [disabled]="(myform.invalid || numero_service == null || nom == null)" >Suivant</ion-button>
+    </div>
+  </div>
+</form>
+
+    </div>
+
+
+
+
+
+
+    <div class="sub-menu" *ngIf="vu==2">
+
+      <div class="parent_two parent">
+       
+      <div class="choice">
+        <ion-row class="row_champ" (click)="choix_2()">
+          <ion-col size="2"><img class="icon_champ"  src="{{ logo_pays }}" alt=""></ion-col>
+          <ion-col size="10" class="wal_t2">{{ nom_pays }}</ion-col>
+        </ion-row>
+  
+        <div class="choix-content2 choix-content {{ class_content2 }}">
+          <ion-row class="row1">
+            <ion-col>
+              <img class="icon_pays" src="assets/senegal.png" (click)="select_pays('Sénégal','assets/senegal.png','sn')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/ivoire.png" (click)="select_pays('Côte d\'ivoire','assets/ivoire.png','ci')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/burkina.png" (click)="select_pays('Burkina Faso','assets/burkina.png','bf')" alt="">
+            </ion-col>
+          </ion-row>
+          <ion-row class="row1">
+            <ion-col>
+              <img class="icon_pays" src="assets/benin.png" (click)="select_pays('Benin','assets/benin.png','bj')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/mali.png" (click)="select_pays('Mali','assets/mali.png','ml')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/togo.png" (click)="select_pays('Togo','assets/togo.png','tg')" alt="">
+            </ion-col>
+    
+          </ion-row>
+        </div>
+      </div>
+    </div>
+
+      <div class="parent" style="margin-top: -30px;">
+        <div class="text">
+        <h4>Choisissez le wallet à débiter</h4>
+      </div>
+      <div class="choix" *ngIf="code_pays == 'sn'">
+        <ion-row>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om',1)" [class]="om" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Wave_icon.png" (click)="wallets('wave',1)" [class]="wave" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/FreeMony_icon.png" (click)="wallets('fm',1)" [class]="fm" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Emoney_icon.png" (click)="wallets('emoney',1)" [class]="emoney" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Wizall_icon.png" (click)="wallets('wizall',1)" [class]="wizall" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/usdt.png" (click)="wallets('usdt',0)" [class]="usdt" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'ci'">
+        <ion-row>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om_ci',1)" [class]="om_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Wave_icon.png" (click)="wallets('wave_ci',1)" [class]="wave_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_ci',1)" [class]="moov_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/mtn.png" (click)="wallets('mtn_ci',1)" [class]="mtn_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/usdt.png" (click)="wallets('usdt',0)" [class]="usdt" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'bf'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om_bf',1)" [class]="om_bf" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_bf',1)" [class]="moov_bf" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/usdt.png" (click)="wallets('usdt',0)" [class]="usdt" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'bj'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/mtn.png" (click)="wallets('mtn_bj',1)" [class]="mtn_bj" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_bj',1)" [class]="moov_bj" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/usdt.png" (click)="wallets('usdt',0)" [class]="usdt" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'ml'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om_ml',1)" [class]="om_ml" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_ml',1)" [class]="moov_ml" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/usdt.png" (click)="wallets('usdt',0)" [class]="usdt" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'tg'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/t-money.png" (click)="wallets('tm',1)" [class]="tm" alt="">
+          </ion-col>
+   
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/usdt.png" (click)="wallets('usdt',0)" [class]="usdt" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </div>
+
+    <form [formGroup]="myform2">
+  <div class="validation" *ngIf="wallet != null && view === 1">
+
+    <span class="label" style="margin-top: 30px;">Numéro {{wallet}}</span>
+    <div class="item">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon_com" src="assets/LOGO/{{logo_wallet}}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="text" pattern="[0-9]*" inputmode="numeric" minlength="7" maxlength="10" formControlName="numero_wallet" [(ngModel)]="numero_wallet"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="label" style="margin-top: 20px;" *ngIf="service == 'Tawfeex'">Nombre de Cartes</span>
+    <div class="item_nbr">
+      <ion-row>
+        <ion-col size="2" (click)="nombres('rm')">
+          <ion-icon name="remove" class="icon_nbr"></ion-icon> 
+        </ion-col>
+        <ion-col size="8">
+            <span class="text_nbr"> {{nombre}} </span>
+        </ion-col>
+            <ion-col size="2" (click)="nombres('add')">
+              <ion-icon name="add" class="icon_nbr"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="frais" *ngIf="service == 'Tawfeex'">Coût Global : <b style="color: #EE7160;">{{ le_prix | number : fractionSize}} F CFA</b></span>
+    <span class="frais" *ngIf="service == 'Tawfeex' && parrain != null">Parrain : <b style="color: #EE7160;">{{parrain}}</b></span>
+    <span class="frais" *ngElse>Frais de recharge de 1%</span>
+  
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="set_vu(3)" [disabled]="myform2.invalid || numero_wallet == null" >Suivant</ion-button>
+    </div>
+  </div>
+
+  <div class="validation" *ngIf="wallet != null && view === 0">
+
+    <span class="label" style="margin-top: 30px;">Paiement {{wallet}}</span>
+    
+    <span class="label" style="margin-top: 20px;" *ngIf="service == 'Tawfeex'">Nombre de Cartes</span>
+    <div class="item_nbr">
+      <ion-row>
+        <ion-col size="2" (click)="nombres('rm')">
+          <ion-icon name="remove" class="icon_nbr"></ion-icon> 
+        </ion-col>
+        <ion-col size="8">
+            <span class="text_nbr"> {{nombre}} </span>
+        </ion-col>
+            <ion-col size="2" (click)="nombres('add')">
+              <ion-icon name="add" class="icon_nbr"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="label"  *ngIf="service == 'Tawfeex'">Coût Global : <b style="color: #EE7160;margin-top: 10px;"> {{prix*nombre | number : fractionSize}}$ (USDT) </b></span>
+    <span class="frais" *ngIf="service == 'Tawfeex' && parrain != null">Parrain : <b style="color: #EE7160;">{{parrain}}</b></span>
+    <span class="frais" *ngElse>Frais de recharge de 1%</span>
+  
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="copy_usdt()">Copier adresse</ion-button>
+    </div>
+  </div>
+
+    </form>
+
+    </div>
+
+
+
+
+
+
+    <div class="sub-menu" *ngIf="vu==3">
+
+      <div class="parent text">
+    
+      <div class="choix">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/{{logo_wallet}}"  alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="{{logo_pays}}" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+
+  <div class="validation">
+
+
+    <div class="resume">
+
+      <div class="content1">
+       <div style="display: flex;flex-direction:row;width: 100%;justify-content: center;">  <span class="span_resume sp1">Paiement LSI </span> <img src="assets/LOGO/{{logo_service}}" style="width: 35px;margin-left: 10px;margin-top: 10px;" alt=""></div>
+        <div class="line line1"></div>
+      </div>
+
+      <div class="content1">
+        <span class="span_resume"> {{nom}}</span>
+        <div class="line line2"></div>
+      </div>
+      
+      <div class="content1">
+        <span class="span_resume sp3"> {{numero_service}}</span>
+        <div class="line line2"></div>
+      </div>
+
+      <div class="content1">
+        <span class="span_resume sp4" *ngIf="wallet != 'USDT'"> {{montant*nombre | number : fractionSize}} F</span>
+        <span class="span_resume sp4" *ngIf="wallet == 'USDT'"> {{prix*nombre | number : fractionSize}}$ (USDT)</span>
+        <div class="line line3"></div>
+      </div>
+
+    </div>
+    
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" *ngIf="wallet != 'USDT'" (click)="before_validation()" [disabled]="button == 0">Acheter</ion-button>
+      <ion-button shape="round" href="https://wa.me/221762617403?text={{id_trans}}" target="_blank" class="button-content" *ngIf="wallet == 'USDT'" [disabled]="button == 0">Poursuivre</ion-button>
+    </div>
+  </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="sub-menu" *ngIf="vu==4">
+
+      <div class="parent text">
+    
+    </div>
+
+
+  <div class="validation">
+
+
+    <div class="resume">
+
+   
+      <a class="a-tag" id="afds" href="{{url}}" target="_blank" (click)="confirmer_wave()" [hidden]="click_url == 0"> Cliquez ici pour valider</a>
+      <span class="sp-tag" [hidden]="click_url == null">Transaction en cours ...</span>
+
+    </div>
+    
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" [routerLink]="['/home']" [hidden]="click_url == 0">Retour</ion-button>
+    </div>
+  </div>
+
+    </div>
+
+
+
+    <div class="sub-menu" *ngIf="vu==5">
+
+      <div class="parent text">
+    
+    </div>
+
+
+  <div class="validation">
+
+
+    <div class="resume">
+
+   
+<span class="sp-tag" [hidden]="mess=='fail'">Transaction réussie, merci d'avoir utilisé DiokoCash</span>
+<span class="sp-tag" [hidden]="mess=='success'">Transaction non aboutie !</span>
+
+    </div>
+    
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" [routerLink]="['/home']">Retour</ion-button>
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Alerte de transaction</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;" *ngIf="add_num===0">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> {{ notif }} </span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;" *ngIf="type===2">
+                <span class="text_mod"> Si c'est le vôtre, Merci de l'ajouter à votre liste de confiance. </span>
+              </ion-col>
+              <ion-col size="12"  class="col item2" *ngIf="type===1">
+                <ion-input type="password" class="inp2" minlength="4" placeholder="Mot de passe de transaction" maxlength="4" required [(ngModel)]="trans_pass"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message_tp }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;" *ngIf="add_num===2">
+            <ion-row>
+  
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Veuillez contacter le support par WhatsApp au +221 76 261 74 03 pour ajouter ce numéro. </span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;" *ngIf="add_num===1">
+            <ion-row>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Veuillez saisir le code OTP pour valider. </span>
+              </ion-col>
+              <ion-col size="12"  class="col item2">
+                <ion-input type="password" class="inp2" minlength="9" placeholder="Code OTP" maxlength="9" required [(ngModel)]="code_otp"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+        </div>
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="add_num===0">
+          <ion-button shape="round" class="button-content_m" *ngIf="type===1" (click)="confirm_pass()">Valider</ion-button>
+          <ion-button shape="round" class="button-content_aj" *ngIf="type===2" (click)="add()">Ajouter</ion-button>
+          <ion-button shape="round" class="button-content_a" *ngIf="type===2" (click)="cancel()">Annuler</ion-button>
+        </div>
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="add_num===1">
+          <ion-button shape="round" class="button-content_aj" (click)="ajouter()" [disabled]="code_otp==null">Valider</ion-button>
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Annuler</ion-button>
+        </div>
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="add_num===2">
+          <ion-button shape="round" class="button-content_aj" href="https://wa.me/message/GOT3AT5BUJGKA1" target="_blank">Contacter</ion-button>
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Annuler</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal #ConfirmModal trigger="confirm_modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Confirmation</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money'"> Composez le #144#391# ou <a href="tel:%23 144 %23 391 %23" ion-button>cliquez ici</a> et saisissez votre code secret pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money BF'"> Composez le *144*4*6*{{donnees.montant+donnees.frais}}# ou <a href="tel:*144*4*6*{{donnees.montant+donnees.frais}}%23" ion-button>cliquez ici</a> et saisissez votre code secret pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money ML'"> Composez le #144#77# ou <a href="tel:%23 144 %23 77 %23" ion-button>cliquez ici</a> et saisissez votre code secret pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money CI'"> Composez le #144*82# ou <a href="tel:%23 144*82 %23" ion-button>cliquez ici</a> + option 2 pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Wizall Money'"> Veuillez saisir le code OTP reçu </span>
+              </ion-col>
+              <ion-col size="12"  class="col item2">
+                <ion-input type="password" class="inp2" pattern="[0-9]*" inputmode="numeric" placeholder="OTP de Validation" required [(ngModel)]="code_vali"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button shape="round" class="button-content_a" (click)="close_confirm()">Annuler</ion-button>
+          <ion-button shape="round" class="button-content_aj" (click)="valider()" [disabled]="code_vali==null">Valider</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+
+
+  <ion-modal #ParrainModal trigger="parrain_modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Parrainage</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod" *ngIf="parrain != null"> Votre parrain: <b style="color: green;">{{parrain}}</b>.</span>
+                <span class="text_mod" *ngIf="parrain == null" style="color: red;"> Il n'y a pas de parrain trouvé pour ce Code</span>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> Cliquez sur continuer pour poursuivre</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button shape="round" class="button-content_a" (click)="close_parrain()">Retour</ion-button>
+          <ion-button shape="round" class="button-content_aj" (click)="set_vu(2)">Continuer</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-content>

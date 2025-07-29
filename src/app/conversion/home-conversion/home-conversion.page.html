@@ -1,0 +1,263 @@
+<ion-content class="">
+
+  <div class="container" (click)="out()">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']"></ion-img>
+     <div class="div-span">
+
+     </div>
+    </div>
+
+    <div class="sub-menu">
+
+      <div class="parent1 parent">
+        <div class="text">
+        <h4>Choix Wallet à débiter</h4>
+      </div>
+      <div class="choix1 choix">
+        <ion-row *ngIf="hideitem_1 == false" class="row_champ">
+          <ion-col size="2" (click)="choix_pays()">
+            <img class="icon_pays" *ngIf="pays=='sn'" src="assets/senegal.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='civ'" src="assets/ivoire.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='bf'" src="assets/burkina.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='ml'" src="assets/mali.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='tg'" src="assets/togo.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='bj'" src="assets/benin.png" alt="">
+          </ion-col>
+          <ion-col size="2"><img class="icon_champ"  src="{{ logo_1 }}" alt="" (click)="choix_1()"></ion-col>
+          <ion-col size="6" class="wal_t2" (click)="choix_1()">{{ service_1 }}</ion-col>
+          <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt="" (click)="choix_1()"></ion-col>
+        </ion-row>
+        <ion-row *ngIf="hideitem_1 == true" class="row_champ">
+          <ion-col size="2" (click)="choix_pays()">
+            <img class="icon_pays" *ngIf="pays=='sn'" src="assets/senegal.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='civ'" src="assets/ivoire.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='bf'" src="assets/burkina.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='ml'" src="assets/mali.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='tg'" src="assets/togo.png" alt="">
+            <img class="icon_pays" *ngIf="pays=='bj'" src="assets/benin.png" alt="">
+          </ion-col>
+          <ion-col size="8" class="wal_t2" (click)="choix_1()">
+            <span class="wal_text"> Wallet à débiter</span>
+          </ion-col>
+          <ion-col size="2" (click)="choix_1()"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+        </ion-row>
+        <div class="choix-content1 choix-content {{ class_content1 }}">
+        
+            <ion-row class="row1">
+              <ion-col size="4" *ngFor="let p of list_pays">
+                <img class="icon_om" src="{{p.logo}}" (click)="selectItem_1(p.service,p.logo,p.color)" alt="">
+              </ion-col>
+            </ion-row>
+          
+        </div>
+
+
+        <div class="choix-pays_d choix-content-p {{ class_pays_d }}">
+          <div class="row-pays" (click)="selectPays('sn')">
+            <img class="im-pays" src="assets/senegal.png" alt="">
+            <span class="col-text">SN (+221)</span>
+          </div>
+          <hr >
+          <div class="row-pays" (click)="selectPays('bf')">
+            <img class="im-pays" src="assets/burkina.png" alt="">
+            <span class="col-text">BF (+226)</span>
+          </div>
+          <hr>
+          <div class="row-pays" (click)="selectPays('bj')">
+            <img class="im-pays" src="assets/benin.png" alt="">
+            <span class="col-text">BJ (+229)</span>
+          </div>
+          <hr >
+          <div class="row-pays" (click)="selectPays('civ')" >
+            <img class="im-pays" src="assets/ivoire.png" alt="">
+            <span class="col-text">CI (+225)</span>
+          </div>
+          <hr >  
+          <div class="row-pays" (click)="selectPays('ml')" >
+            <img class="im-pays" src="assets/mali.png" alt="">
+            <span class="col-text">ML (+223)</span>
+          </div>
+          <hr >  
+          <div class="row-pays-l" (click)="selectPays('tg')" >
+            <img class="im-pays" src="assets/togo.png" alt="">
+            <span class="col-text">TG (+228)</span>
+          </div>
+          <hr>   
+      </div>
+      </div>
+    </div> 
+
+<!--       <div class="parent1 parent">
+        <div class="text">
+        <h4>Wallet à débiter</h4>
+      </div>
+      <div class="choix1 choix">
+        <ion-row *ngIf="hideitem_1 == false" class="row_champ" (click)="choix_1()">
+          <ion-col size="2"><img class="icon_champ"  src="{{ logo_1 }}" alt=""></ion-col>
+          <ion-col size="8" class="wal_t2">{{ service_1 }}</ion-col>
+          <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+        </ion-row>
+        <ion-row *ngIf="hideitem_1 == true" class="row_champ" (click)="choix_1()">
+          <ion-col size="10" class="wal_t2">
+            <span class="wal_text">Choisir le wallet à débiter</span>
+          </ion-col>
+          <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+        </ion-row>
+        <div class="choix-content1 choix-content {{ class_content1 }}">
+        
+            <ion-row class="row1">
+              <ion-col>
+                <img class="icon_om" src="assets/LOGO/OrangeMoney_icon.png" (click)="selectItem_1('Orange Money')" alt="">
+              </ion-col>
+              <ion-col>
+                <img class="icon_wave" src="assets/LOGO/Wave_icon.png" (click)="selectItem_1('Wave')" alt="">
+              </ion-col>
+            </ion-row>
+     
+            <ion-row>
+              <ion-col>
+                <img class="icon_free" src="assets/LOGO/FreeMony_icon.png" (click)="selectItem_1('Free Money')" alt="">
+              </ion-col>
+              <ion-col>
+                <img class="icon_wave" src="assets/LOGO/Wizall_icon.png" (click)="selectItem_1('Wizall Money')" alt="">
+              </ion-col>
+            </ion-row>
+          
+        </div>
+      </div>
+    </div>  -->
+
+    <div class="parent2 parent">
+      <div class="text2">
+      <h4>Choix Wallet à Créditer</h4>
+    </div>
+    <div class="choix2 choix">
+
+      <ion-row *ngIf="hideitem_2 == false" class="row_champ">
+        <ion-col size="2" (click)="choix_pays_c()">
+          <img class="icon_pays" *ngIf="pays_c=='sn'" src="assets/senegal.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='civ'" src="assets/ivoire.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='ml'" src="assets/mali.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='bj'" src="assets/benin.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='bf'" src="assets/burkina.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='tg'" src="assets/togo.png" alt="">
+        </ion-col>
+        <ion-col size="2"><img class="icon_champ"  src="{{ logo_2 }}" alt="" (click)="choix_2()"></ion-col>
+        <ion-col size="6" class="wal_t2" (click)="choix_2()">{{ service_2 }}</ion-col>
+        <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt="" (click)="choix_2()"></ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="hideitem_2 == true" class="row_champ">
+        <ion-col size="2" (click)="choix_pays_c()">
+          <img class="icon_pays" *ngIf="pays_c=='sn'" src="assets/senegal.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='civ'" src="assets/ivoire.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='ml'" src="assets/mali.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='bj'" src="assets/benin.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='bf'" src="assets/burkina.png" alt="">
+          <img class="icon_pays" *ngIf="pays_c=='tg'" src="assets/togo.png" alt="">
+        </ion-col>
+        <ion-col size="8" class="wal_t2" (click)="choix_2()">
+          <span class="wal_text"> Wallet à Créditer</span>
+        </ion-col>
+        <ion-col size="2" (click)="choix_2()"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+      </ion-row>
+      <div class="choix-content2 choix-content {{ class_content2 }}">
+      
+          <ion-row class="row1">
+            <ion-col size="4" *ngFor="let pc of list_pays_c">
+              <img class="icon_om" src="{{pc.logo}}" (click)="selectItem_2(pc.service,pc.logo,pc.color)" alt="">
+            </ion-col>
+          </ion-row>
+        
+      </div>
+
+
+      <div class="choix-pays_c choix-content-p {{ class_pays_c }}">
+        <div class="row-pays" (click)="selectPays_c('sn')">
+          <img class="im-pays" src="assets/senegal.png" alt="">
+          <span class="col-text">SN (+221)</span>
+        </div>
+        <hr>
+        <div class="row-pays" (click)="selectPays_c('bf')">
+          <img class="im-pays" src="assets/burkina.png" alt="">
+          <span class="col-text">BF (+226)</span>
+        </div>
+        <hr>
+        <div class="row-pays" (click)="selectPays_c('bj')" >
+          <img class="im-pays" src="assets/benin.png" alt="">
+          <span class="col-text">BJ (+229)</span>
+        </div>
+        <hr>
+        <div class="row-pays" (click)="selectPays_c('civ')" >
+          <img class="im-pays" src="assets/ivoire.png" alt="">
+          <span class="col-text">CI (+225)</span>
+        </div>
+        <hr>  
+        <div class="row-pays-l" (click)="selectPays_c('ml')">
+          <img class="im-pays" src="assets/mali.png" alt="">
+          <span class="col-text">ML (+223)</span>
+        </div>
+        <hr>
+        <div class="row-pays-l" (click)="selectPays_c('tg')" >
+          <img class="im-pays" src="assets/togo.png" alt="">
+          <span class="col-text">TG (+228)</span>
+        </div>
+        <hr>         
+    </div>
+    </div>
+  </div> 
+
+
+<!--     <div class="parent2 parent">
+      <div class="text2">
+        <h4>Wallet à créditer</h4>
+      </div>
+
+    <div class="choix2 choix">
+      <ion-row *ngIf="hideitem_2 == false" class="row_champ" (click)="choix_2()">
+        <ion-col size="2"><img class="icon_champ"  src="{{ logo_2 }}" alt=""></ion-col>
+        <ion-col size="8" class="wal_t2">{{ service_2 }}</ion-col>
+        <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+      </ion-row>
+      <ion-row *ngIf="hideitem_2 == true" class="row_champ" (click)="choix_2()">
+        <ion-col size="10" class="wal_t2">
+          <span class="wal_text">Choisir le wallet à créditer</span>
+        </ion-col>
+        <ion-col size="2"><img class="icon_fleche"  src="assets/MENU-CONVERSION/fleche.png" alt=""></ion-col>
+      </ion-row>
+      <div class="choix-content2 choix-content {{ class_content2 }}">
+        <ion-row class="row1">
+          <ion-col>
+            <img class="icon_om" src="assets/LOGO/OrangeMoney_icon.png" (click)="selectItem_2('Orange Money')" alt="">
+          </ion-col>
+          <ion-col>
+            <img class="icon_wave" src="assets/LOGO/Wave_icon.png" (click)="selectItem_2('Wave')" alt="">
+          </ion-col>
+          <ion-col>
+            <img class="icon_wave" src="assets/LOGO/FreeMony_icon.png" (click)="selectItem_2('Free Money')" alt="">
+          </ion-col>
+  
+        </ion-row>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="validation" *ngIf="service_1 != null && service_2 != null">
+    <div class="text">
+        <span class="text-content">Merci de vérifier la transaction</span>
+    </div>
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="valider()">Valider</ion-button>
+    </div>
+  </div>
+
+    </div>
+
+  </div>
+
+  <div class="container2">
+  </div>
+</ion-content>

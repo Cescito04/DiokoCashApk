@@ -1,0 +1,312 @@
+.container {
+    height: auto;
+    width: 100%;
+    min-height: 100%;
+    display: block;
+    background-image: url(/assets/MENU/Background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow-y: auto;
+  }
+  
+  .content{
+  vertical-align: middle;
+  }
+  
+  .icon{
+    width: 80%;
+  }
+  .icon2{
+    width: 60%;
+  }
+  
+  .col_icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .item{
+    background-color: white;
+    border: 3px solid #EE7160;
+    border-radius: 20px;
+    height: 50px;
+    margin-top: 10px;
+  }
+
+  
+  ion-input{
+    font-size: 16px;
+    margin-top: 3px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791 !important;
+    margin-top: -3px;
+    text-align: center;
+  }
+  
+  .label{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .span_label{
+    font-size: 16px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: white !important;
+  }
+  
+  .button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .button-content {
+    color: white !important;
+    --background: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 40px;
+    width: 175px;
+    font-size: 16px;
+    text-transform: none;
+  }
+  
+  
+  ion-label{
+      color: white!important; //change to whatever colour you want here
+      
+    }
+  
+    .div_conn{
+        width: 100%;
+        padding-top: 30%;
+        padding-bottom: 50px;
+        text-align: center;
+    }
+  
+    .connexion{
+        font-weight: bold;
+        font-size: 22px;
+        text-align: center;
+    }
+  
+    .row_mdp{
+        display: flex;
+        align-items: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+  
+    .col_row_mdp{
+        display: flex;
+        justify-content: center;
+    }
+  
+    .underline{
+        font-size: 14px;
+        text-decoration: underline;
+        --ion-font-family:  'avnext'!important;
+        font-family:  'avnext' !important;
+    }
+
+    .text_r{
+      font-size: 18px;
+      --ion-font-family:  'avnext'!important;
+      font-family:  'avnext' !important;
+      color: #2A4791;
+      font-weight: bold;     
+    }
+
+    .te{
+      position: absolute;
+      top: 30%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: white;
+    }
+
+    .line{
+      border-top: 2px solid #2A4791;
+      width: 80%;
+      margin-top: 13px;
+      margin-bottom: 13px;
+    }
+  
+  
+    @media (min-device-width: 320px) and (max-device-width: 369px) { 
+  
+      .container{
+        min-height: 850px;
+      }
+  
+      .underline{
+        font-size: 12px;
+      }
+  
+    }
+
+    .back {
+        width: 40px;
+        margin-left: 45px;
+        padding-top: 55px;
+        position: absolute;
+        top: 0;
+    }
+
+    @keyframes tesx {
+      from {height: 45vh;}
+      to {height: 52vh;}
+    }
+    
+    .tesx{
+      animation-name: tesx;
+      animation-duration: 1s;
+    }
+
+    .menu {
+      height: 52vh;
+      width: 100%;
+      display: block;
+      padding-bottom: 0px;
+      background-image: url(/assets/MENU-CONVERSION/parametres.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+  }
+
+    .test {
+      display:inline-block;
+      width:88%;
+      margin-left: 6%;
+      margin-top: -40px;
+      color:white;
+      filter:url(#round);
+    }
+              .test::before{
+    
+                   content:"";
+       display:block;
+      height: 40vh;
+      
+       background:currentColor;
+       border-radius: 0px 0px 25px 25px;
+    clip-path: polygon(50% 55%, 51% 15%, 100% 0, 100% 100%, 0 100%, 0 0, 49% 15%);
+              }
+
+// modal css 
+
+ion-modal{
+  --height: auto;
+
+  --width: 80%;
+  --border-radius: 20px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  backdrop-filter: blur(10px);
+}
+
+ion-modal::part(backdrop) {
+  background: white;
+  opacity: 1;
+  overflow-y:auto;
+}
+
+.titre{
+  color: #EE7160;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  font-size: 18px;
+}
+.trait{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.le_trait{
+  width: 50%;
+  border: 1px solid #EE7160;
+}
+
+.detail_modal{
+  width: 80%;
+  margin-left: 10%;
+  height: auto;
+  background-color: rgba(238,113,96,0.1);
+  border-radius: 40px;
+
+}
+
+.text_mod{
+  color: #2A4791;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  font-size: 14px;
+}
+
+.col{
+  display: flex;
+  justify-content: center;
+}
+
+.button_m{
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.button-content_aj {
+  color: white !important;
+  --background: green;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  height: 45px;
+  width: auto;
+  font-size: 18px;
+  text-transform: none;
+}
+.button-content_a {
+  color: white !important;
+  --background: red;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  height: 45px;
+  width: auto;
+  font-size: 18px;
+  text-transform: none;
+}
+
+ion-row{
+  display: flex;
+  align-items: center;
+}
+
+ion-col{
+  margin-bottom: 5px;
+}
+
+
+
+.span_f{
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  color: #2A4791;
+  font-size: 18px;
+  margin-top: -1px;
+}
+
+
+
+             // pour ios seulement 
+ 
+                  .te{
+                margin-top: 31vh;
+                background-color: white;
+                width: 80%;
+                margin-left: 4%;
+              }      

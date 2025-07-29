@@ -1,0 +1,190 @@
+
+<ion-content>
+
+  <div class="container">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home-conversion']"></ion-img>
+     <div class="div-span">
+<!--       <span class="span-top">Détails de la <br> transaction.</span> -->
+     </div>
+
+    </div>
+    <div class="titre">
+      <span class="titre_span"><b [ngStyle]="{'color': donnees.color_1}">{{donnees.service_1}}</b> vers <b [ngStyle]="{'color': donnees.color_2}">{{donnees.service_2}}</b></span>
+    </div>
+    <div class="details">
+      <div class="recap" *ngIf="vu===0">
+        <ion-row>
+          <ion-col size="4" class="fle_im im1">
+            <ion-img class="recap_s" src="{{donnees.logo_1}}"></ion-img>
+          </ion-col>
+          <ion-col size="4" class="fle">
+            <ion-img src="assets/MENU-CONVERSION/07.png"></ion-img>
+          </ion-col>
+          <ion-col size="4" class="fle_im">
+            <ion-img class="recap_s" src="{{donnees.logo_2}}"></ion-img>
+          </ion-col>
+        </ion-row>
+       </div>
+
+      <div class="infos" *ngIf="vu===0">
+        <ion-row>
+          <ion-col size="3">
+            <img class="image_infos" src="assets/MENU-CONVERSION/pocket.png" alt="">
+          </ion-col>
+          <ion-col size="9">
+            <span class="text_infos">Montant<b style="visibility:hidden">55</b>  | <b style="visibility:hidden">55</b> {{donnees.montant}} F</span>
+          </ion-col>
+
+          <ion-col size="3">
+            <img class="image_infos2" src="assets/MENU-CONVERSION/com.png" alt="">
+          </ion-col>
+          <ion-col size="9">
+            <span class="text_infos"><b style="visibility:hidden">5</b>Frais<b style="visibility:hidden">aaii1</b> | <b style="visibility:hidden">55</b>  {{donnees.frais}} F</span>
+          </ion-col>
+
+          <ion-col size="3">
+            <img class="image_infos3" src="assets/MENU-CONVERSION/total.png" alt="">
+          </ion-col>
+          <ion-col size="9">
+            <span class="text_infos"><b style="visibility:hidden">5</b>Total <b style="visibility:hidden">555</b> | <b style="visibility:hidden">55</b> {{donnees.montant+donnees.frais}} F</span>
+          </ion-col>
+
+        </ion-row>
+      </div>
+      
+      <div class="infos_a" *ngIf="vu===1">
+        <a class="a-tag" id="afds" href="{{url}}" target="_blank" (click)="confirmer_wave()" [hidden]="click_url == 0"> Cliquez ici pour valider</a>
+        <span class="sp-tag" [hidden]="click_url == null">Transaction en cours ...</span>
+      </div>
+      <div class="infos_a" *ngIf="vu===2">
+        <span class="sp-tag" [hidden]="mess=='fail'">Transaction réussie, merci d'avoir utilisé Dioko</span>
+        <span class="sp-tag" [hidden]="mess=='success'">Transaction non aboutie !</span>
+      </div>
+
+    </div>
+
+    
+    <div class="button" *ngIf="vu===0">
+      <ion-button shape="round" class="button-content" (click)="before_validation()" [disabled]="d_button == 1" [hidden]="click_url == 0 || vu == 2">Confirmer</ion-button>
+    </div>
+
+  </div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Alerte de transaction</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;" *ngIf="add_num===0">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> {{ notif }} </span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;" *ngIf="type===2">
+                <span class="text_mod"> Si c'est le vôtre, Merci de l'ajouter à votre liste de confiance. </span>
+              </ion-col>
+              <ion-col size="12"  class="col item" *ngIf="type===1">
+                <ion-input type="password" minlength="4" placeholder="Mot de passe de transaction" maxlength="4" required [(ngModel)]="trans_pass"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message_tp }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;" *ngIf="add_num===2">
+            <ion-row>
+  
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Veuillez contacter le support par WhatsApp au +221 76 261 74 03 pour ajouter ce numéro. </span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;" *ngIf="add_num===1">
+            <ion-row>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"> Veuillez saisir le code OTP pour valider. </span>
+              </ion-col>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" minlength="6" placeholder="Code OTP" maxlength="9" required [(ngModel)]="code_otp"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+        </div>
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="add_num===0">
+          <ion-button shape="round" class="button-content_m" *ngIf="type===1" (click)="confirm_pass()">Valider</ion-button>
+          <ion-button shape="round" class="button-content_aj" *ngIf="type===2" (click)="add()">Ajouter</ion-button>
+          <ion-button shape="round" class="button-content_a" *ngIf="type===2" (click)="cancel()">Annuler</ion-button>
+        </div>
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="add_num===1">
+          <ion-button shape="round" class="button-content_aj" (click)="ajouter()" [disabled]="code_otp==null">Valider</ion-button>
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Annuler</ion-button>
+        </div>
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="add_num===2">
+          <ion-button shape="round" class="button-content_aj" href="https://wa.me/message/GOT3AT5BUJGKA1" target="_blank">Contacter</ion-button>
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Annuler</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal #ConfirmModal trigger="confirm_modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Confirmation</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money'"> Composez le #144#391# ou <a href="tel:%23 144 %23 391 %23" ion-button>cliquez ici</a> et saisissez votre code secret pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money BF'"> Composez le *144*4*6*{{donnees.montant+donnees.frais}}# ou <a href="tel:*144*4*6*{{donnees.montant+donnees.frais}}%23" ion-button>cliquez ici</a> et saisissez votre code secret pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money ML'"> Composez le #144#77# ou <a href="tel:%23 144 %23 77 %23" ion-button>cliquez ici</a> et saisissez votre code secret pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Orange Money CI'"> Composez le #144*82# ou <a href="tel:%23 144*82 %23" ion-button>cliquez ici</a> + option 2 pour générer le code OTP. </span>
+                <span class="text_mod" *ngIf="form.value.debit == 'Wizall Money'"> Veuillez saisir le code OTP reçu </span>
+              </ion-col>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" pattern="[0-9]*" inputmode="numeric" placeholder="OTP de Validation" required [(ngModel)]="code_vali"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button shape="round" class="button-content_a" (click)="close_confirm()">Annuler</ion-button>
+          <ion-button shape="round" class="button-content_aj" (click)="valider()" [disabled]="code_vali==null">Valider</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-content>

@@ -1,0 +1,90 @@
+<ion-content class="" >
+  <ion-img src="assets/hand-swipe.gif" style="position: absolute;margin-top: 60%;width: 60vw;;right: 20vw;z-index: 100;opacity: 0.8;" *ngIf="hand==1 || hand==2"></ion-img>
+  <ion-img src="assets/Chargement.gif" style="position: absolute;width: 25vw;  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);z-index: 1000;" *ngIf="loader==true"></ion-img>
+  <div class="container" style="filter: {{loader == false ? null : 'blur(3px)' }}">
+    <div class="menu" [class]="class1">
+      <ion-img class="histo" src="assets/MENU/Historique_icon.png" [routerLink]="['/histo-crypto']"></ion-img>
+    <!--   <ion-img class="share" src="assets/MENU/share.png"></ion-img> -->
+      
+    </div>
+
+    <div class="sub-menu">
+      <div style="width: 100%;margin-top: 5px;padding-top: 5px;text-align: center;margin-top: 15px;">
+        <span style="font-size: 18px;font-weight: bold;" class="spa">Choisir une cryptodevise</span>
+      </div>
+      <ion-row>
+        <ion-col size="4">
+          <div [routerLink]="['/crypto']" style="width: 100px; height: 100px;background-color: #EE7160;border-radius: 30px;margin-top: 25px;padding-top: 15px;padding-left: 15px;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+            <img src="assets/crypto/usdt.png" style="width: 80%;" alt="">
+          </div>
+          <div [routerLink]="['/crypto']" style="width: 100px; height: 100px;margin-top: 5px;padding-top: 5px;padding-left: 27px;">
+            <span style="font-size: 16px;font-weight: bold;" class="spa">USDT</span>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div style="width: 100px; height: 100px;background-color: #EE7160;border-radius: 30px;margin-top: 25px;padding-top: 15px;padding-left: 15px;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+            <img src="assets/crypto/btc.png" style="width: 80%;" alt="">
+          </div>
+          <div style="width: 100px; height: 100px;margin-top: 5px;padding-top: 5px;text-align: center;">
+            <span style="font-size: 16px;font-weight: bold;" class="spa">Bitcoin</span>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div style="width: 100px; height: 100px;background-color: #EE7160;border-radius: 30px;margin-top: 25px;padding-top: 15px;padding-left: 15px;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+            <img src="assets/crypto/eth.png" style="width: 80%;" alt="">
+          </div>
+          <div style="width: 100px; height: 100px;margin-top: 5px;padding-top: 5px;text-align: center;">
+            <span style="font-size: 16px;font-weight: bold;" class="spa">Ethereum</span>
+          </div>
+        </ion-col>
+      </ion-row>
+  
+
+    <!--   <div class="button_m">
+        <ion-button shape="round" class="button-content_aj" (click)="valider()" [disabled]="code_vali==null">Suivant</ion-button>
+      </div> -->
+    </div>
+  </div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Affiliations</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%">
+          
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod">DIOKO fait une redistribution d’une partie de ses bénéfices à ses clients en proposant un service permettant aux utilisateurs de gagner des commissions par le partage de l’application.
+                  L’affiliation est le nom donné à ce service; les parrains DIOKO auront à gagner jusqu’à
+                  1 000 000 FCFA sur chaque personne affiliée.
+                  Le nombre d’affiliés permis est illimité.
+                  1 affilié égal potentiellement 1 000 000 FCFA que le parrain aura à gagner.
+                  DIOKO veux créer une nouvelle dimension de la finance en proposant divers services pour faciliter les transactions.
+                  L’affiliation est une connexion entre DIOKO est ses utilisateurs privilégiés qui, en plus d’être clients, gagnent aussi une partie des commissions.</span>
+              </ion-col>
+
+              <ion-col size="12"  class="col" style="margin-top: -10px;">
+                <span class="text_mod"><span class="text_mod-in">Dioko, Na nu DIOKO</span></span>
+              </ion-col>
+
+            </ion-row>
+          </div>
+
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button shape="round" class="button-content_a" (click)="annuler()">Fermer</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

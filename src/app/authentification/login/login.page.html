@@ -1,0 +1,59 @@
+
+<ion-content class="">
+<div class="container">
+  
+
+<div class="dlogo">
+
+<ion-img class="logo" src="assets/logo.png"></ion-img>
+
+</div>
+
+
+<form [formGroup]="form" (submit)="confirm(form)">
+
+
+    <div class="label">
+      <span class="span_label">  Numéro de téléphone</span>
+    </div>
+    <div class="item" style="margin-bottom: 30px;">
+      <ion-row>
+        <ion-col class="col_icon" size="2">
+          <img class="icon" src="assets/id3.png" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input class="" required formControlName="email" type="text" pattern="[0-9]*" inputmode="numeric"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <div class="label">
+      <span class="span_label">Mot de passe</span>
+    </div>
+    <div class="item" style="margin-bottom: 30px;">
+      <ion-row>
+        <ion-col class="col_icon" size="2">
+          <img class="icon2" src="assets/password2.png" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="password" required formControlName="password"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" type="submit" [disabled]="form.invalid" >Se Connecter</ion-button>
+    </div>
+
+    <ion-row class="row_mdp">
+      <ion-col size="6" class="col_row_mdp"><span class="underline" tappable [routerLink]="['/password-reset']">Mot de passe oublié?</span></ion-col>
+      <ion-col size="6" class="col_row_mdp"><span class="underline" tappable [routerLink]="['/register']">Créer un compte</span></ion-col>
+    </ion-row>
+
+
+</form>
+
+</div>
+</ion-content>

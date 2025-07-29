@@ -1,0 +1,110 @@
+
+<ion-content>
+
+  <div class="container">
+
+    <div [class]="class1" class="menu">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']"></ion-img>
+     <div class="div-span">
+
+     </div>
+
+    </div>
+
+
+  <div class="content">
+    <button #ShowModal id="open-modal" expand="block" hidden></button>
+
+
+    <div class="group" *ngFor="let t of transactions">
+      <ion-row style="border-bottom: 3px solid #EE7160;">
+        <ion-col size="10">
+      <div class="group-header">
+        <span class="group-date">{{t['created_at'] | date: 'dd/MM/Y HH:mm'}}</span>
+      </div>
+      <div class="group-content">
+        <ion-row>
+          <ion-col size="4" class="fle_im  col im1">
+            <ion-img *ngIf="t['service_destinataire'] == 'Orange Money' || t['service_destinataire'] == 'Orange Money ML' || t['service_destinataire'] == 'Orange Money BF' || t['service_destinataire'] == 'Orange Money CI'" class="recap_s" src="assets/LOGO/OrangeMoney_icon.png"></ion-img>
+            <ion-img *ngIf="t['service_destinataire'] == 'Wave' || t['service_destinataire'] == 'Wave CI'" class="recap_s" src="assets/LOGO/Wave_icon.png"></ion-img>
+            <ion-img *ngIf="t['service_destinataire'] == 'Free Money'" class="recap_s" src="assets/LOGO/FreeMony_icon.png"></ion-img>
+            <ion-img *ngIf="t['service_destinataire'] == 'Wizall Money'" class="recap_s" src="assets/LOGO/Wizall_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_destinataire'] == 'E-Money'" src="assets/LOGO/Emoney_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_destinataire'] == 'Moov BF' || t['service_destinataire'] == 'Moov CI' || t['service_destinataire'] == 'Moov ML' || t['service_destinataire'] == 'Moov BJ'" src="assets/LOGO/moov.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_destinataire'] == 'T-Money'" src="assets/LOGO/t-money.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_destinataire'] == 'Mtn BJ' || t['service_destinataire'] == 'Mtn CI'" src="assets/LOGO/mtn.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_destinataire'] == 'USDT'" src="assets/LOGO/usdt.png"></ion-img>
+            <span class="text_r">{{t['numero_destinataire']}}</span>
+          </ion-col>
+          <ion-col size="4" class="fle col ">
+            <ion-img src="assets/MENU-CONVERSION/07.png"></ion-img>
+          </ion-col>
+          <ion-col size="4" class="fle_im col ">
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Orange Money' || t['service_beneficiaire'] == 'Orange Money ML' || t['service_beneficiaire'] == 'Orange Money BF' || t['service_beneficiaire'] == 'Orange Money CI'" src="assets/LOGO/OrangeMoney_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Wave' || t['service_beneficiaire'] == 'Wave CI'" src="assets/LOGO/Wave_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Free Money'" src="assets/LOGO/FreeMony_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Wizall Money'" src="assets/LOGO/Wizall_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'E-Money'" src="assets/LOGO/Emoney_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'airtime_orange'" src="assets/LOGO/orange.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'airtime_free'" src="assets/LOGO/free.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'airtime_expresso'" src="assets/LOGO/expresso.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Woyofal'" src="assets/LOGO/woyofal.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Tawfeex'" src="assets/LOGO/Lsi_.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Moov BF' || t['service_beneficiaire'] == 'Moov CI' || t['service_beneficiaire'] == 'Moov BJ' || t['service_beneficiaire'] == 'Moov ML'" src="assets/LOGO/moov.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'T-Money'" src="assets/LOGO/t-money.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'multiple'" src="assets/LOGO/multi.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['service_beneficiaire'] == 'Mtn BJ' || t['service_beneficiaire'] == 'Mtn CI'" src="assets/LOGO/mtn.png"></ion-img>
+            <span class="text_r">{{t['numero_beneficiaire']}}</span>
+          </ion-col>
+        </ion-row>
+      </div>
+      </ion-col>
+      <ion-col size="2" style="display: flex;align-items: flex-end;">
+        <ion-icon name="eye" style="font-size: 30px;color: #EE7160;padding-bottom: 15px;" (click)="loadData(t['id'])" expand="block"></ion-icon>
+      </ion-col>
+      </ion-row>
+    </div>
+
+    
+
+    
+  </div>
+
+  </div>
+
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: 100%;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Détails de la transaction</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%;padding-left:10%">
+        <div class="tex"><span class="text_content">Date & Heure : {{transaction['created_at'] | date: 'dd/MM/Y - HH:mm'}}</span></div>
+        <br>
+        <div class="tex"><span class="text_content">De {{transaction['service_destinataire']}} : {{transaction['numero_destinataire']}}</span></div>
+        <br>
+        <div class="tex"><span class="text_content" *ngIf="transaction['service_beneficiaire']=='airtime_orange'">Vers Crédit Orange : {{transaction['numero_beneficiaire']}}</span></div>
+        <div class="tex"><span class="text_content" *ngIf="transaction['service_beneficiaire']=='airtime_free'">Vers Crédit Free : {{transaction['numero_beneficiaire']}}</span></div>
+        <div class="tex"><span class="text_content" *ngIf="transaction['service_beneficiaire']=='airtime_expresso'">Vers Crédit Expresso : {{transaction['numero_beneficiaire']}}</span></div>
+        <div class="tex"><span class="text_content" *ngIf="transaction['service_beneficiaire']!='airtime_orange' && transaction['service_beneficiaire']!='airtime_free' && transaction['service_beneficiaire']!='airtime_expresso'">Vers {{transaction['service_beneficiaire']}} : {{transaction['numero_beneficiaire']}}</span></div>
+        <br>
+        <div class="tex"><span class="text_content">Montant : {{transaction['montant']}} F</span></div>
+        <br>
+        <div class="tex"><span class="text_content">Frais : {{transaction['montant_initial']-transaction['montant']}} F</span></div>
+        <br>
+        <div class="tex" style="padding-bottom: 5px;"><span class="text_content">ID Transaction : {{transaction['id_transaction']}}</span></div>
+
+       
+        </div>
+        <div class="button">
+          <ion-button shape="round" class="button-content" (click)="reprendre(transaction['id'])">Reconduire</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

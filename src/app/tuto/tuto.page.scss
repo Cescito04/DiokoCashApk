@@ -1,0 +1,57 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    display: block;
+    background-image: url(/assets/tuto/Background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.illustration {
+        height: 70vh;
+        width: 86%;
+        margin-left: 7%;
+        display: block;
+        background-image: url(/assets/tuto/Illustration.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+
+}
+
+.fleche {
+    width: 40px;
+    margin-left: 10px;
+}
+
+.button-1 {
+    color: #EE7160 !important;
+    --background: white;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 60px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5%;   
+    margin-right: 5%;
+}
+
+.span-1{
+    color: #EE7160 !important;
+}
+
+.h-1{
+    color: white !important;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-weight: bold;
+    font-size: 18px;
+}

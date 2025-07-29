@@ -1,0 +1,70 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController, ToastController, ModalController } from '@ionic/angular';
+import { AuthService } from '../auth.service';
+import { IdVerificationModalComponent } from '../../id-verification-modal/id-verification-modal.component';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+})
+export class LoginPage implements OnInit {
+
+  constructor(private auth: AuthService,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private reqService: AuthService,
+    private router: Router,
+    private modalCtrl: ModalController) { }
+form = new FormGroup({
+email: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+password: new FormControl('', [Validators.required]),
+
+})
+  ngOnInit() {
+  }
+
+  ionViewDidEnter(){
+    this.reqService.check_auth().subscribe(
+      async () => {
+        this.router.navigateByUrl('home');
+      },
+      async () => {
+
+      }
+    );
+
+  }
+
+  async confirm(){
+    const loading = await this.loadingCtrl.create({message: 'En cours...'});
+    await loading.present();
+    this.auth.login(this.form.value).subscribe(
+      async (data: any) => {
+        loading.dismiss();
+        localStorage.removeItem('token');
+        localStorage.setItem('token',data['token']);
+        // Vérifier le statut utilisateur
+        this.auth.check_auth().subscribe(async (user: any) => {
+          if (user.status && user.status !== 'id_verified') {
+            const modal = await this.modalCtrl.create({
+              component: IdVerificationModalComponent
+            });
+            await modal.present();
+            this.router.navigateByUrl('/');
+          } else {
+            this.router.navigateByUrl('/');
+          }
+        });
+      },
+      async () => {
+        const alert = await this.toastCtrl.create({message: "Ces données ne correspondent pas à nos enregstrements...", duration: 3000, color: 'dark'});
+        alert.present();
+        loading.dismiss();
+      }
+    );
+  }
+
+}

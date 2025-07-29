@@ -1,0 +1,166 @@
+<ion-content class="" (click)="out()">
+
+  <div class="container">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/crypto']"></ion-img>
+     <div class="div-span">
+
+     </div>
+    </div>
+
+
+    <div class="sub-menu">
+
+      <div class="parent_two parent">
+        <div class="text">
+          <h4>Choisir votre pays</h4>
+        </div>
+      <div class="choice">
+        <ion-row class="row_champ" (click)="choix_2()">
+          <ion-col size="2"><img class="icon_champ"  src="{{ logo_pays }}" alt=""></ion-col>
+          <ion-col size="10" class="wal_t2">{{ nom_pays }}</ion-col>
+        </ion-row>
+  
+        <div class="choix-content2 choix-content {{ class_content2 }}">
+          <ion-row class="row1">
+            <ion-col>
+              <img class="icon_pays" src="assets/senegal.png" (click)="select_pays('Sénégal','assets/senegal.png','sn')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/ivoire.png" (click)="select_pays('Côte d\'ivoire','assets/ivoire.png','ci')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/burkina.png" (click)="select_pays('Burkina Faso','assets/burkina.png','bf')" alt="">
+            </ion-col>
+          </ion-row>
+          <ion-row class="row1">
+            <ion-col>
+              <img class="icon_pays" src="assets/benin.png" (click)="select_pays('Benin','assets/benin.png','bj')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/mali.png" (click)="select_pays('Mali','assets/mali.png','ml')" alt="">
+            </ion-col>
+            <ion-col>
+              <img class="icon_pays" src="assets/togo.png" (click)="select_pays('Togo','assets/togo.png','tg')" alt="">
+            </ion-col>
+    
+          </ion-row>
+        </div>
+      </div>
+    </div>
+
+      <div class="parent" style="margin-top: 25px; margin-bottom: 15px;">
+        <div class="text">
+        <h4>Choisissez le wallet à créditer</h4>
+      </div>
+      <div class="choix" *ngIf="code_pays == 'sn'" style="margin-top: -15px;">
+        <ion-row>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om',1)" [class]="om" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Wave_icon.png" (click)="wallets('wave',1)" [class]="wave" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/FreeMony_icon.png" (click)="wallets('fm',1)" [class]="fm" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Emoney_icon.png" (click)="wallets('emoney',1)" [class]="emoney" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Wizall_icon.png" (click)="wallets('wizall',1)" [class]="wizall" alt="">
+          </ion-col>
+    
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'ci'">
+        <ion-row>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om_ci',1)" [class]="om_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/Wave_icon.png" (click)="wallets('wave_ci',1)" [class]="wave_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_ci',1)" [class]="moov_ci" alt="">
+          </ion-col>
+          <ion-col size="" class="col">
+            <img class="icon2" src="assets/LOGO/mtn.png" (click)="wallets('mtn_ci',1)" [class]="mtn_ci" alt="">
+          </ion-col>
+   
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'bf'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om_bf',1)" [class]="om_bf" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_bf',1)" [class]="moov_bf" alt="">
+          </ion-col>
+       
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'bj'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/mtn.png" (click)="wallets('mtn_bj',1)" [class]="mtn_bj" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_bj',1)" [class]="moov_bj" alt="">
+          </ion-col>
+         
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'ml'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om_ml',1)" [class]="om_ml" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/moov.png" (click)="wallets('moov_ml',1)" [class]="moov_ml" alt="">
+          </ion-col>
+   
+        </ion-row>
+      </div>
+
+      <div class="choix" *ngIf="code_pays == 'tg'">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/t-money.png" (click)="wallets('tm',1)" [class]="tm" alt="">
+          </ion-col>
+
+        </ion-row>
+      </div>
+
+    </div>
+
+    <span class="label" *ngIf="wallet != null">Numéro {{ wallet }}</span>
+    <div class="item" style="margin-bottom: 10px;" *ngIf="wallet != null">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon_pocket" src="assets/LOGO/{{ logo_wallet }}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="text" required pattern="[0-9]*" inputmode="numeric" [(ngModel)]="numero" (ngModelChange)="updatedNumero()"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="button" style="margin-top: 25px;" *ngIf="wallet != null">
+      <ion-button shape="round" class="button-content" (click)="valider()" [disabled]="form2.invalid">Suivant</ion-button>
+    </div>
+
+    </div>
+
+
+  </div>
+
+
+
+</ion-content>

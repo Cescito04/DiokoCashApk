@@ -1,0 +1,186 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    display: block;
+    background-image: url(/assets/MENU/Background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow-y: auto;
+}
+
+
+@keyframes tess {
+  from {height: 55vh;}
+  to {height: 50vh;}
+}
+
+.tess{
+  animation-name: tess;
+  animation-duration: 1s;
+}
+
+.menu {
+    height: 50vh;
+    width: 100%;
+    display: block;
+    background-image: url(/assets/MENU-CONVERSION/historique.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
+
+.back {
+    width: 40px;
+    margin-left: 45px;
+    padding-top: 55px;
+}
+
+.div-span{
+    text-align: center;
+    margin-top: 40%;
+    padding-bottom: 1px;
+  }
+  
+  .span-top{
+    font-size: 25px;
+    text-align: center;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+  }
+
+  .content{
+    width: 90%;
+    margin-left: 5%;
+    height: 45vh;
+    background-color: white;
+    border-radius: 40px;
+    overflow-y: auto;
+  }
+
+
+  .group-header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .group-date{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .group-content{
+    width: 100%;
+    height: auto;
+    background-color: rgba(238,113,96,0.1);
+    border-radius: 10px;
+  }
+
+  ion-row{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  ion-modal{
+    --height: auto;
+    --width: 90%;
+    --border-radius: 20px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  ion-modal::part(backdrop) {
+    background: white;
+    opacity: 1;
+  }
+
+
+  .recap_s{
+    width: 70%;
+  }
+
+  .text_r{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 10px;
+  }
+
+  .col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fle{
+    padding-top: 15px;
+  }
+
+  .titre{
+    color: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 18px;
+  }
+
+
+  .text_content{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 16px;
+    
+  }
+
+  .trait{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .le_trait{
+    width: 50%;
+    border: 1px solid #EE7160;
+  }
+  
+  .tex{
+    padding-bottom: 0px;
+  }
+
+
+  .button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button-content {
+    color: white !important;
+    --background: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    width: 95px !important;
+    font-size: 12px;
+    text-transform: none;
+  }
+
+  @media (min-device-width: 320px) and (max-device-width: 369px) { 
+    .text_content{
+      font-size: 12px;
+    }
+
+    .div-span{
+      margin-top: 30%;
+
+    }
+
+    ion-modal{
+      --height: 50%;
+
+    }
+  }
+  

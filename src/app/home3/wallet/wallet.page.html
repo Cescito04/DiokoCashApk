@@ -1,0 +1,72 @@
+<ion-content class="">
+  <ion-img src="assets/Chargement.gif" style="position: absolute;width: 25vw;  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);z-index: 1000;" *ngIf="loader==true"></ion-img>
+  <div class="container" style="filter: {{loader == false ? null : 'blur(3px)' }}">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/crypto']"></ion-img>
+     <div class="div-span">
+
+     </div>
+    </div>
+
+
+    <div class="sub-menu">
+    
+      <span class="label">Votre adresse <b style="color: #339966;">USDT</b> (TRC20)</span>
+      <div class="item" style="margin-bottom: 10px;">
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon" src="" alt="">
+          </ion-col>
+          <ion-col size="10">
+            <ion-input type="text" pattern="[0-9]*" inputmode="numeric"  required id="asdd" [(ngModel)]="adresse" (ngModelChange)="updatedMontant()"></ion-input>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <span class="label">USDTs à recevoir (en $)</span>
+      <div class="item" style="margin-bottom: 40px;">
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon_pocket" src="assets/LOGO/usdt.png" alt="">
+          </ion-col>
+          <ion-col size="10">
+            <ion-input type="text" id="usd" pattern="[0-9]*" inputmode="numeric" required  [(ngModel)]="usdt" (ngModelChange)="updatedUsdt()"></ion-input>
+          </ion-col>
+        </ion-row>
+        <span class="text">Le <b style="color: white;">maximum</b> disponible est <b style="color: white;">{{dispo}}$</b></span>
+      </div>
+
+      <span class="label">Montant à débiter en F CFA</span>
+      <div class="item" style="margin-bottom: 10px;">
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon_pocket" src="assets/MENU-CONVERSION/pocket.png" alt="">
+          </ion-col>
+          <ion-col size="10">
+            <ion-input type="text" id="mont" pattern="[0-9]*" inputmode="numeric" required readonly [(ngModel)]="montant" (ngModelChange)="updatedMontant()"></ion-input>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+  
+
+      <div class="button">
+        <ion-button shape="round" class="button-content" type="button" (click)="valider()" [disabled]="form2.invalid || dispo < usdt">Valider</ion-button>
+      </div>
+
+
+
+
+      
+    </div>
+
+
+  </div>
+
+
+
+</ion-content>

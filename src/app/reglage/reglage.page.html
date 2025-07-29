@@ -1,0 +1,228 @@
+
+<ion-content class="">
+  <div class="container">
+
+
+  
+  <div class="menu" [class]="class1">
+    <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']"></ion-img>
+   <div class="div-span">
+
+   </div>
+  </div>
+
+  <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <filter id="round">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 15 -9" result="goo" />
+    <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+  </filter>
+     </defs>
+  </svg>
+
+  
+          <div class="test">
+            <div class="te">
+              <span class="text_r" (click)="password()">Modifier mot(s) de passe</span>
+              <div class="line"></div>
+
+              <span class="text_r" (click)="favoris()">Gestion de mes numéros</span>
+              <div class="line"></div>
+
+              <span class="text_r" [routerLink]="['/affiliation']">Partager l'application</span>
+              <div class="line"></div>
+
+              <span class="text_r">{{ contact }}</span>
+             
+            </div>
+           
+          </div>
+
+  
+      <div class="button">
+        <ion-button shape="round" class="button-content" (click)="deconnexion()" >Se déconnecter</ion-button>
+      </div>
+  
+   
+  
+ 
+  
+  </div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre" *ngIf="vu_num===1">Mes numéros autorisés</span>
+        <span class="titre" *ngIf="vu_num===2">Ajout de numéro</span>
+        <span class="titre" *ngIf="vu_num===3">Ajout de numéro</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: auto" *ngIf="vu_num===1">
+          <div class="detail_modal" *ngFor="let numeros of numeros" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ numeros['numero'] }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+        <div style="width: auto" *ngIf="vu_num===2">
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              
+              <ion-col size="2"  class="col" style="text-align: center;vertical-align: middle;margin-top: 10px;">
+                  <span class="span_f">+</span>
+              </ion-col>
+              <ion-col size="10"  class="col item">
+                <ion-input type="text" placeholder="Indicatif pays" pattern="[0-9]*" inputmode="numeric" required [(ngModel)]="indicatif"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col item">
+                <ion-input type="text" placeholder="Numéro de téléphone" pattern="[0-9]*" inputmode="numeric" required [(ngModel)]="le_numero"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+        <div style="width: auto" *ngIf="vu_num===3">
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="number" minlength="9" placeholder="Code OTP" maxlength="9" required [(ngModel)]="le_otp"></ion-input>
+              </ion-col>
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message_2 }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px">
+          <ion-button shape="round" class="button-content_aj" *ngIf="vu_num===1" (click)="add()">Ajouter</ion-button>
+          <ion-button shape="round" class="button-content_a" *ngIf="vu_num===1" (click)="cancel()">Fermer</ion-button>
+          <ion-button shape="round" class="button-content_aj" *ngIf="vu_num===2" (click)="otp_fav()" [disabled]="le_numero == null || indicatif == null">Continuer</ion-button>
+          <ion-button shape="round" class="button-content_aj" *ngIf="vu_num===3" (click)="valider_otp()" [disabled]="le_otp == null">Valider</ion-button>
+          <ion-button shape="round" class="button-content_a" *ngIf="vu_num===2 || vu_num===3" (click)="annuler()">Annuler</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+
+  <ion-modal #modalites trigger="password_modal">
+    <ng-template>
+      <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre" *ngIf="vu_pwd == 0">Mots De Passe</span>
+        <span class="titre" *ngIf="vu_pwd == 1">Mots De Passe Principal</span>
+        <span class="titre" *ngIf="vu_pwd == 2" >Mot De Passe Transaction</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: auto" *ngIf="vu_pwd == 0">
+          <div class="" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col">
+              <ion-button shape="round" style="width: auto;" (click)="pwd_principal()" class="button-content">Mot de passe Principal</ion-button>
+              </ion-col> 
+            </ion-row>
+          </div>
+          <div class="" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col">
+              <ion-button shape="round" style="width: auto;" (click)="pwd_trans()" class="button-content">Mot de passe de transaction</ion-button>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+        <form [formGroup]="form1" (submit)="change_pwd(form1)">
+        <div style="width: auto" *ngIf="vu_pwd == 1">
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" formControlName="ancien" required placeholder="Ancien Mot de passe"></ion-input>
+              </ion-col> 
+            </ion-row>
+          </div>
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" formControlName="nouveau" required placeholder="Nouveau Mot de passe"></ion-input>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" formControlName="confirmation" required placeholder="Confirmation Mot de passe"></ion-input>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="vu_pwd == 1">
+
+          <ion-button shape="round" class="button-content_aj" type="submit" [disabled]="form1.invalid">Valider</ion-button>
+          <ion-button shape="round" type="button" class="button-content_a" (click)="annuler_2()">Annuler</ion-button>
+        </div>
+
+      </form>
+
+      <form [formGroup]="form2" (submit)="change_pwd_trans(form2)">
+        <div style="width: auto" *ngIf="vu_pwd == 2">
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" formControlName="principal" placeholder="Mot de passe principal" required></ion-input>
+              </ion-col> 
+            </ion-row>
+          </div>
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" formControlName="nouveau" minlength="4" placeholder="Nouveau Mot de passe" maxlength="4" required></ion-input>
+              </ion-col> 
+            </ion-row>
+          </div>
+
+          <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+            <ion-row>
+              <ion-col size="12"  class="col item">
+                <ion-input type="password" formControlName="confirmation" minlength="4" placeholder="Confirmation Mot de passe" maxlength="4" required></ion-input>
+              </ion-col> 
+              <ion-col size="12"  class="col">
+                <span class="text_mod"> {{ message_pt }}</span>
+              </ion-col> 
+            </ion-row>
+          </div>
+        </div>
+
+
+        <div class="button_m" style="margin-bottom: 10px" *ngIf="vu_pwd===2">
+          <ion-button shape="round" class="button-content_aj" type="submit" [disabled]="form2.invalid">Valider</ion-button>
+          <ion-button shape="round" type="button" class="button-content_a" (click)="annuler_2()">Annuler</ion-button>
+        </div>
+
+      </form>
+
+
+
+      </div>
+    </ng-template>
+  </ion-modal>
+
+
+
+  </ion-content>
+  

@@ -1,0 +1,191 @@
+<ion-content class="">
+
+  <div class="container">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home-conversion']"></ion-img>
+     <div class="div-span">
+      <span class="span-top">{{donnees.service_1}} <br><b class="text-blue"> vers </b> <br> {{donnees.service_2}}</span>
+     </div>
+     <div class="recap">
+      <ion-row>
+        <ion-col size="4" class="fle_im im1">
+          <ion-img class="recap_s" src="{{donnees.logo_1}}"></ion-img>
+        </ion-col>
+        <ion-col size="4" class="fle">
+          <ion-img src="assets/MENU-CONVERSION/07.png"></ion-img>
+        </ion-col>
+        <ion-col size="4" class="fle_im">
+          <ion-img class="recap_s" src="{{donnees.logo_2}}"></ion-img>
+        </ion-col>
+      </ion-row>
+     </div>
+    </div>
+
+
+    <div class="sub-menu">
+      <form [formGroup]="form2" (submit)="setRecu(form2)">
+      <span class="label">Numéro <b [ngStyle]="{'color': donnees.color_1}">{{donnees.service_1}}</b></span>
+      <div class="item" style="margin-bottom: 10px;">
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon" src="{{donnees.logo_1}}" (click)="selectItem_1('Orange Money')" alt="">
+          </ion-col>
+          <ion-col size="8">
+            <ion-input type="text" pattern="[0-9]*" inputmode="numeric" minlength="{{length_d}}" maxlength="{{maxlength_d}}" required formControlName="destinataire" [(ngModel)]="destinataire"></ion-input>
+          </ion-col>
+          <ion-col size="2" style="padding: none">
+            <ion-icon name="server-outline" class="icon-calendar" (click)="setFav()"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <div class="item-favoris" *ngIf="favorisCard == true">
+          <div class="contact-card" *ngFor="let fav of favori;let i = index" (click)="favoris(fav.numero)">
+            <span class="contact-text">Favoris {{i+1}}</span>
+            <span class="contact-text">{{fav.numero}}</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="label">Numéro <b [ngStyle]="{'color': donnees.color_2}">{{donnees.service_2}}</b></span>
+      <div class="item" style="margin-bottom: 10px;">
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon" src="{{donnees.logo_2}}" alt="">
+          </ion-col>
+          <ion-col size="8">
+            <ion-input type="text" pattern="[0-9]*" inputmode="numeric" minlength="{{length_b}}" maxlength="{{maxlength_b}}" required formControlName="beneficiaire" [(ngModel)]="beneficiaire" (ngModelChange)="filter($event)"></ion-input>
+          </ion-col>
+          <ion-col size="2" style="padding: none">
+            <ion-icon name="reader-outline" class="icon-calendar" (click)="setOpen()"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <div class="item-contact" *ngIf="contactCard == true">
+          <div class="contact-card" *ngFor="let contact of contacts">
+            <span class="contact-text">{{contact?.name?.display}}</span>
+            <span class="contact-text" *ngFor="let phone of contact?.phones" (click)="contactss(phone?.number)">{{ phone?.number }}</span>
+          </div>
+        </div>
+
+      </div>
+
+  
+
+      <span class="label">Montant</span>
+      <div class="item" style="margin-bottom: 10px;">
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon_pocket" src="assets/MENU-CONVERSION/pocket.png" alt="">
+          </ion-col>
+          <ion-col size="10">
+            <ion-input type="number" pattern="[0-9]*" inputmode="numeric" required formControlName="montant" [(ngModel)]="recu"></ion-input>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <span class="label" hidden>Commission</span>
+      <div class="item" hidden>
+        <ion-row>
+          <ion-col size="2">
+            <img class="icon_com" src="assets/MENU-CONVERSION/com.png" alt="">
+          </ion-col>
+          <ion-col size="10">
+            <ion-input type="number" pattern="[0-9]*" inputmode="numeric" formControlName="frais" readonly></ion-input>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div class="button">
+        <ion-button shape="round" class="button-content" type="submit" *ngIf="destinataire == beneficiaire" [disabled]="form2.invalid || !test" >Envoyer</ion-button>
+        <ion-button shape="round" class="button-content" type="button" (click)="modal()" *ngIf="destinataire != beneficiaire" [disabled]="form2.invalid || !test" >Envoyer</ion-button>
+      </div>
+
+
+      <ion-modal #confirmModal trigger="confirm_modal" class="ion-modal">
+        <ng-template>
+          <div style="height: auto;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;overflow-y: auto;">
+           <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+            <span class="titre">Confirmation</span>
+           </div>
+            <div class="trait" style="margin-bottom: 20px;">
+              <div class="le_trait"></div>
+            </div>
+            <div style="width: 100%">
+    
+              <div class="detail_modal" style="padding-top: 4px;margin-bottom: 15px;">
+                <ion-row>
+    
+                  <ion-col size="12"  class="col" style="margin-top: -10px;">
+                    <span class="text_mod"> Les numéros <b style="color: #EE7160;">{{ destinataire }}</b> et <b style="color: #EE7160;">{{ beneficiaire }}</b> ne sont pas identiques.</span>
+                  </ion-col>
+                  <ion-col size="12"  class="col">
+                    <span class="text_mod"> Cliquez sur continuer pour poursuivre</span>
+                  </ion-col> 
+                </ion-row>
+              </div>
+    
+            </div>
+    
+            <div class="button_m" style="margin-bottom: 10px">
+              <ion-button shape="round" class="button-content_a" (click)="close_confirm()">Retour</ion-button>
+              <ion-button shape="round" class="button-content_aj" (click)="setRecu()">Continuer</ion-button>
+            </div>
+          </div>
+        </ng-template>
+      </ion-modal>
+
+
+      <ion-modal [isOpen]="isModalOpen" style="">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="setOpen(false)">Annuler</ion-button>
+              </ion-buttons>
+              <ion-title>Contacts</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="setOpen(false)" [strong]="true">Confirmer</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <ion-list>
+              <ion-row>
+                <ion-col size="12">Prenoem ern nom</ion-col>
+                <ion-col size="12">Telephone</ion-col>
+              </ion-row>
+            </ion-list>
+            <ion-list>
+              <ion-row>
+                <ion-col size="12">Prenoem ern nom</ion-col>
+                <ion-col size="12">Telephone</ion-col>
+              </ion-row>
+            </ion-list>
+            <ion-list>
+              <ion-row>
+                <ion-col size="12">Prenoem ern nom</ion-col>
+                <ion-col size="12">Telephone</ion-col>
+              </ion-row>
+            </ion-list>
+           <ion-list  *ngFor="let contact of contacts" style="border-top: 2px solid white;">
+            <ion-row>
+              <ion-col size="12">{{contact?.name?.display}}</ion-col>
+              <ion-col size="12" *ngFor="let phone of contact?.phones">{{phone?.number}}</ion-col>
+            </ion-row>
+           </ion-list>
+           {{contacts | json}}
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+
+      </form>
+    </div>
+
+
+  </div>
+
+
+
+</ion-content>

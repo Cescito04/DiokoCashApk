@@ -1,0 +1,554 @@
+
+.container {
+    height: auto;
+    width: 100%;
+    min-height: 100%;
+    display: block;
+    background-image: url(/assets/MENU/Background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow-y: auto;
+}
+
+
+@keyframes test {
+    from {height: 55vh;}
+    to {height: 50vh;}
+  }
+
+  .test{
+    animation-name: test;
+    animation-duration: 1s;
+  }
+
+  @keyframes test2 {
+    from {height: 55vh;}
+    to {height: 50vh;}
+  }
+
+  .test2{
+    animation-name: test2;
+    animation-duration: 1s;
+  }
+
+  @keyframes test3 {
+    from {height: 55vh;}
+    to {height: 50vh;}
+  }
+
+  .test3{
+    animation-name: test3;
+    animation-duration: 1s;
+  }
+  @keyframes test4 {
+    from {height: 55vh;}
+    to {height: 50vh;}
+  }
+
+  .test4{
+    animation-name: test4;
+    animation-duration: 1s;
+  }
+
+  ::ng-deep .cus
+{
+  --width: 60%;
+}
+
+.menu {
+    height: 50vh;
+    width: 100%;
+    min-height: 380px;
+    display: block;
+    background-image: url(/assets/MENU-CONVERSION/multiples.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.back {
+    width: 40px;
+    margin-left: 45px;
+    padding-top: 55px;
+}
+
+
+
+.sub-menu{
+  margin-top: -50px;
+  padding-top: 0px;
+}
+
+.text{
+  width: 100%;
+  text-align: center;
+}
+
+
+.vide{
+  display: block;
+}  
+
+h4{
+  font-size: 16px;
+  color: white;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+}
+
+
+
+
+.validation{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.text{
+  display: flex;
+  justify-content: center;
+  margin-top: 45px;
+}
+
+.button{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-content {
+  color: white !important;
+  --background: #EE7160;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  height: 40px;
+  width: 40%;
+  font-size: 16px;
+  text-transform: none;
+}
+
+.button2{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button-content2 {
+    color: white !important;
+    --background: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 40px;
+    width: 30%;
+    font-size: 16px;
+    text-transform: none;
+  }
+  
+
+.span-top{
+  font-size: 25px;
+  text-align: center;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+}
+
+.div-span{
+  text-align: center;
+  margin-top: 35%;
+}
+
+.text-blue {
+  color: #2A4791;
+}
+
+.wal_text{
+  font-size: 16px;
+  color: #2A4791;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+}
+
+@media (min-device-width: 320px) and (max-device-width: 369px) { 
+  .wal_text{
+    font-size: 13px;
+  }
+
+}
+
+
+ion-row{
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.icon{
+  width: 60%;
+  margin-top: 0px;
+  margin-left: 0%;
+}
+
+.icon2{
+  width: 80%;
+  margin-top: 8px;
+  margin-left: 0%;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.span_label{
+    margin-top: 5px;
+    font-size: 14px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+}
+
+
+
+.parent {
+    position: relative;
+  }
+
+.parent1{
+    z-index: 20;
+  }
+
+  .choice {
+    position: relative;
+    background-color: white;
+    color: #2A4791;
+    width: 70%;
+    margin-left: 15%;
+    height: 65px;
+    padding-top: 14px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 40px;
+    z-index: initial;
+    box-shadow: 0 4px 2px -2px rgb(0, 0, 0, 0.4);
+  }
+
+  .choice2 {
+    position: relative;
+    background-color: white;
+    color: #2A4791;
+    width: 70%;
+    margin-left: 15%;
+    height: 55px;
+    padding-top: 14px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 40px;
+    z-index: initial;
+    box-shadow: 0 4px 2px -2px rgb(0, 0, 0, 0.4);
+  }
+
+  .row_champ{
+    margin-top: -4px;
+   }
+  
+   .col_ic{
+    display: flex;
+    justify-content: center;
+   }
+   .icon_champ{
+    margin-top: -8px;
+    width: 55px;
+  }
+  .icon_fleche{
+    width: 20px;
+    margin-right: 15px;
+    margin-top:  15px;
+  }
+  
+   .icon_champ2{
+    margin-top: -6px;
+    width: 40px;
+  }
+  .icon_fleche2{
+    width:20px;
+    margin-right: 15px;
+    margin-top:  8px;
+  }
+
+  .choix-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    padding-top: 65px;
+    border-radius: 30px;
+    background-color: white;
+    width: 100%;
+    z-index: -1;
+  }
+
+
+  .wal_text{
+    font-size: 16px;
+    color: #2A4791;
+    margin-top:12px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+  }
+  .wal_text2{
+    font-size: 16px;
+    color: #2A4791;
+    margin-top:6px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+  }
+  
+  .wal_t2{
+   padding-top: 9px;
+  }
+
+  .vide{
+    display: block;
+  }  
+
+  .destinataire{
+    width: 70%;
+    margin-left: 15%;
+    height: 40px;
+    background-color: white;
+    border-radius: 40px;
+  }
+
+  .text_dest{
+    font-size: 16px;
+    color: #2A4791;
+    margin-top: -4px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+  }
+
+  .col_dest{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .item{
+    background-color: white;
+    border-radius: 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 55px;
+    margin-top: 0px;
+  }
+
+  ion-input{
+    font-size: 16px;
+    margin-top: 3px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791 !important;
+    text-align: center;
+  }
+
+
+  .details {
+    height: auto;
+    width: 84%;
+    background-color: white;
+    margin-left: 8%;
+    border-radius: 30px;
+    border: 4px solid #EE7160;
+    margin-top: 25px;
+    padding-bottom: 20px;
+}
+
+  .recap{
+    width: 70%;
+    margin-top: 20px;
+    margin-left: 15%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .span_recap{
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791 !important; 
+    margin-left: 5px;
+  }
+
+  .recap_s{
+    width: 90%;
+  }
+
+
+  .infos{
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+  }
+
+  .infos_a{
+    width: 100%;
+    display: flex;
+   justify-content: center;
+  }
+
+  .text_infos{
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791;
+    font-size: 14px;
+  }
+
+  .image_infos {
+    width: 80%;
+  }
+  .image_infos2 {
+    width: 60%;
+  }
+  .image_infos3 {
+    width: 90%;
+  }
+
+
+  .a-tag, .sp-tag{
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #EE7160 !important;
+    font-size: 18px;
+    margin-top: 15%;
+    margin-bottom: 15%;
+  }
+
+  ion-modal{
+    --height: auto;
+
+    --width: 80%;
+    --border-radius: 20px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  ion-modal::part(backdrop) {
+    background: white;
+    opacity: 1;
+    overflow-y:auto;
+  }
+
+  .titre{
+    color: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 18px;
+  }
+  .trait{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .le_trait{
+    width: 50%;
+    border: 1px solid #EE7160;
+  }
+
+  .detail_modal1{
+    width: 80%;
+    margin-left: 10%;
+    height: auto;
+    background-color: rgba(238,113,96,0.1);
+    border-radius: 40px;
+
+  }
+
+  .detail_modal{
+    width: 80%;
+    margin-left: 10%;
+    height: auto;
+    background-color: white;
+    border-radius: 40px;
+
+  }
+
+  .text_mod{
+    color: #2A4791;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    font-size: 14px;
+  }
+
+  .col{
+    display: flex;
+    justify-content: center;
+  }
+
+
+
+  .item2{
+    background-color: white;
+    border: 3px solid #EE7160;
+    border-radius: 20px;
+    height: 50px;
+    margin-top: 10px;
+  }
+
+  .le_input{
+    font-size: 16px;
+    margin-top: 3px;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    color: #2A4791 !important;
+    margin-top: -3px;
+    text-align: center;
+  }
+
+
+
+  .button_m{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .button-content_m {
+    color: white !important;
+    --background: #EE7160;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: auto;
+    font-size: 18px;
+    text-transform: none;
+  }
+  .button-content_aj {
+    color: white !important;
+    --background: green;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: auto;
+    font-size: 18px;
+    text-transform: none;
+  }
+  .button-content_a {
+    color: white !important;
+    --background: red;
+    --ion-font-family:  'avnext'!important;
+    font-family:  'avnext' !important;
+    height: 45px;
+    width: auto;
+    font-size: 18px;
+    text-transform: none;
+  }

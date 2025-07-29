@@ -1,0 +1,264 @@
+<ion-content class="">
+
+  <div class="container">
+
+    <div class="menu" [class]="class1">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']" *ngIf="vu==1"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" (click)="set_vu(1)" *ngIf="vu==2"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" (click)="set_vu(2)" *ngIf="vu==3"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']" *ngIf="vu==4"></ion-img>
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']" *ngIf="vu==5"></ion-img>
+     <div class="div-span">
+<!--       <span class="span-top">Achat <br> de <b class="text-blue"> Crédit </b> <br> téléphonique</span> -->
+     </div>
+    </div>
+
+    <div class="sub-menu" *ngIf="vu==1">
+
+      <div class="parent">
+        <div class="text">
+        <h4>Choisissez l'opérateur</h4>
+      </div>
+      <div class="choix">
+        <ion-row>
+          <ion-col size="4" class="col">
+            <img class="icon" src="assets/LOGO/orange.png" (click)="operateur('orange')" [class]="orange" alt="">
+          </ion-col>
+          <ion-col size="4" class="col">
+            <img class="icon" src="assets/LOGO/free.png" (click)="operateur('free')" [class]="free" alt="">
+          </ion-col>
+          <ion-col size="4" class="col">
+            <img class="icon" src="assets/LOGO/expresso.png" (click)="operateur('expresso')" [class]="expresso" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <form [formGroup]="myform">
+  <div class="validation" *ngIf="service != null">
+
+    <span class="label">Numéro {{service}}</span>
+    
+  
+    <div class="item">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon_com" src="assets/LOGO/{{logo_service}}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="text" minlength="9" maxlength="9" formControlName="numero_service" [(ngModel)]="numero_service" required></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <span class="label">Montant</span>
+    <div class="item">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon2" src="assets/MENU-CONVERSION/pocket.png" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="number" minlength="3" [(ngModel)]="montant" formControlName="montant"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="set_vu(2)" [disabled]="myform.invalid || numero_service == null || montant == null" >Suivant</ion-button>
+    </div>
+  
+  </div>
+</form>
+    </div>
+
+
+
+
+
+
+    <div class="sub-menu" *ngIf="vu==2">
+
+      <div class="parent">
+        <div class="text">
+        <h4>Choisissez le wallet à débiter</h4>
+      </div>
+      <div class="choix">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" (click)="wallets('om')" [class]="om" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/Wave_icon.png" (click)="wallets('wave')" [class]="wave" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/FreeMony_icon.png" (click)="wallets('fm')" [class]="fm" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/Wizall_icon.png" (click)="wallets('wizall')" [class]="wizall" alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+
+    <form [formGroup]="myform2">
+  <div class="validation" *ngIf="wallet != null">
+
+    <span class="label" style="margin-top: 30px;">Numéro {{wallet}}</span>
+    <div class="item">
+      <ion-row>
+        <ion-col size="2">
+          <img class="icon_com" src="assets/LOGO/{{logo_wallet}}" alt="">
+        </ion-col>
+        <ion-col size="10">
+          <ion-input type="text" minlength="9" maxlength="9" formControlName="numero_wallet" [(ngModel)]="numero_wallet"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="set_vu(3)" [disabled]="myform2.invalid || numero_wallet == null" >Suivant</ion-button>
+    </div>
+  </div>
+  </form>
+    </div>
+
+
+
+
+
+
+    <div class="sub-menu" *ngIf="vu==3">
+
+      <div class="parent text">
+    
+      <div class="choix">
+        <ion-row>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/OrangeMoney_icon.png" [class]="om" alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/Wave_icon.png" [class]="wave"  alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/FreeMony_icon.png" [class]="fm"  alt="">
+          </ion-col>
+          <ion-col size="3" class="col">
+            <img class="icon2" src="assets/LOGO/Wizall_icon.png" [class]="wizall"  alt="">
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+
+  <div class="validation">
+
+
+    <div class="resume">
+
+      <div class="content1">
+       <div style="display: flex;flex-direction:row;width: 100%;justify-content: center;">  <span class="span_resume sp1">Achat credit </span> <img src="assets/LOGO/{{logo_service}}" style="width: 35px;margin-left: 10px;margin-top: 10px;" alt=""></div>
+        <div class="line line1"></div>
+      </div>
+      <div class="content1">
+
+        <span class="span_resume"> {{numero_service}}</span>
+        <div class="line line2"></div>
+        
+      </div>
+      <div class="content1">
+
+        <span class="span_resume sp3"> {{montant}} F</span>
+        <div class="line line3"></div>
+        
+      </div>
+
+    </div>
+    
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" (click)="valider()" [disabled]="button == 0">Acheter</ion-button>
+    </div>
+  </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="sub-menu" *ngIf="vu==4">
+
+      <div class="parent text">
+    
+    </div>
+
+
+  <div class="validation">
+
+
+    <div class="resume">
+
+   
+      <a class="a-tag" id="afds" href="{{url}}" target="_blank" (click)="confirmer_wave()" [hidden]="click_url == 0"> Cliquez ici pour valider</a>
+      <span class="sp-tag" [hidden]="click_url == null">Transaction en cours ...</span>
+
+    </div>
+    
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" [routerLink]="['/home']" [hidden]="click_url == 0">Retour</ion-button>
+    </div>
+  </div>
+
+    </div>
+
+
+
+    <div class="sub-menu" *ngIf="vu==5">
+
+      <div class="parent text">
+    
+    </div>
+
+
+  <div class="validation">
+
+
+    <div class="resume">
+
+   
+<span class="sp-tag" [hidden]="mess=='fail'">Transaction réussie, merci d'avoir utilisé DiokoCash</span>
+<span class="sp-tag" [hidden]="mess=='success'">Transaction non aboutie !</span>
+
+    </div>
+    
+
+    <div class="button">
+      <ion-button shape="round" class="button-content" [routerLink]="['/home']">Retour</ion-button>
+    </div>
+  </div>
+
+    </div>
+    
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+  <div class="container2">
+  </div>
+</ion-content>

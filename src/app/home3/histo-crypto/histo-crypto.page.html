@@ -1,0 +1,108 @@
+
+<ion-content>
+
+  <div class="container">
+
+    <div [class]="class1" class="menu">
+      <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/crypto-home']"></ion-img>
+     <div class="div-span">
+
+     </div>
+
+    </div>
+
+
+  <div class="content">
+    <button #ShowModal id="open-modal" expand="block" hidden></button>
+
+
+    <div class="group" *ngFor="let t of transactions">
+      <ion-row style="border-bottom: 3px solid #EE7160;">
+        <ion-col size="10">
+      <div class="group-header">
+        <span class="group-date">{{t['created_at'] | date: 'dd/MM/Y HH:mm'}}</span>
+      </div>
+      <div class="group-content">
+        <ion-row>
+          <ion-col size="4" class="fle_im  col im1">
+            <ion-img *ngIf="t['destinataire'] == 'Orange Money' || t['destinataire'] == 'Orange Money ML' || t['destinataire'] == 'Orange Money BF' || t['destinataire'] == 'Orange Money CI'" class="recap_s" src="assets/LOGO/OrangeMoney_icon.png"></ion-img>
+            <ion-img *ngIf="t['destinataire'] == 'Wave' || t['service_destinataire'] == 'Wave CI'" class="recap_s" src="assets/LOGO/Wave_icon.png"></ion-img>
+            <ion-img *ngIf="t['destinataire'] == 'Free Money'" class="recap_s" src="assets/LOGO/FreeMony_icon.png"></ion-img>
+            <ion-img *ngIf="t['destinataire'] == 'Wizall Money'" class="recap_s" src="assets/LOGO/Wizall_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['destinataire'] == 'E-Money'" src="assets/LOGO/Emoney_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['destinataire'] == 'Moov BF' || t['destinataire'] == 'Moov CI' || t['destinataire'] == 'Moov ML' || t['destinataire'] == 'Moov BJ'" src="assets/LOGO/moov.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['destinataire'] == 'T-Money'" src="assets/LOGO/t-money.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['destinataire'] == 'Mtn BJ' || t['destinataire'] == 'Mtn CI'" src="assets/LOGO/mtn.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['destinataire'] == 'USDT'" src="assets/LOGO/usdt.png"></ion-img>
+            <span class="text_r">{{t['numeroDestinataire']}}</span>
+          </ion-col>
+          <ion-col size="4" class="fle col ">
+            <ion-img src="assets/MENU-CONVERSION/07.png"></ion-img>
+          </ion-col>
+          <ion-col size="4" class="fle_im col ">
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Orange Money' || t['beneficiaire'] == 'Orange Money ML' || t['beneficiaire'] == 'Orange Money BF' || t['beneficiaire'] == 'Orange Money CI'" src="assets/LOGO/OrangeMoney_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Wave' || t['service_beneficiaire'] == 'Wave CI'" src="assets/LOGO/Wave_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Free Money'" src="assets/LOGO/FreeMony_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Wizall Money'" src="assets/LOGO/Wizall_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'E-Money'" src="assets/LOGO/Emoney_icon.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'airtime_orange'" src="assets/LOGO/orange.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'airtime_free'" src="assets/LOGO/free.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'airtime_expresso'" src="assets/LOGO/expresso.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Woyofal'" src="assets/LOGO/woyofal.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Tawfeex'" src="assets/LOGO/Lsi_.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Moov BF' || t['beneficiaire'] == 'Moov CI' || t['beneficiaire'] == 'Moov BJ' || t['service_beneficiaire'] == 'Moov ML'" src="assets/LOGO/moov.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'T-Money'" src="assets/LOGO/t-money.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'USDT'" src="assets/LOGO/usdt.png"></ion-img>
+            <ion-img class="recap_s" *ngIf="t['beneficiaire'] == 'Mtn BJ' || t['beneficiaire'] == 'Mtn CI'" src="assets/LOGO/mtn.png"></ion-img>
+            <span class="text_r" *ngIf="t['beneficiaire'] != 'USDT'">{{t['numeroBeneficiaire']}}</span>
+          </ion-col>
+        </ion-row>
+      </div>
+      </ion-col>
+      <ion-col size="2" style="display: flex;align-items: flex-end;">
+        <ion-icon name="eye" style="font-size: 30px;color: #EE7160;padding-bottom: 15px;" (click)="loadData(t['id'])" expand="block"></ion-icon>
+      </ion-col>
+      </ion-row>
+    </div>
+
+    
+
+    
+  </div>
+
+  </div>
+
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <div style="height: 100%;width: 100%;border: 5px solid #EE7160;border-radius: 20px;background-color: white;">
+       <div class="trait" style="margin-top: 15px;margin-bottom: 5px">
+        <span class="titre">Détails de la transaction</span>
+       </div>
+        <div class="trait" style="margin-bottom: 20px;">
+          <div class="le_trait"></div>
+        </div>
+        <div style="width: 100%;padding-left:10%">
+        <div class="tex"><span class="text_content">Date & Heure : {{transaction['created_at'] | date: 'dd/MM/Y - HH:mm'}}</span></div>
+        <br>
+        <div class="tex"><span class="text_content">De {{transaction['destinataire']}} : {{transaction['numeroDestinataire']}}</span></div>
+        <br>
+        <div class="tex"><span class="text_content" *ngIf="transaction['beneficiaire'] != 'USDT'">Vers {{transaction['beneficiaire']}} : {{transaction['numeroBeneficiaire']}}</span></div>
+        <div class="tex"><span class="text_content" *ngIf="transaction['beneficiaire'] == 'USDT'" style="font-size: 12px;">Vers {{transaction['beneficiaire']}} : {{transaction['numeroBeneficiaire']}}</span></div>
+        <br>
+        <div class="tex"><span class="text_content">Montant en CFA : {{transaction['cfa']}} F</span></div>
+        <br>
+        <div class="tex"><span class="text_content">Montant en Crypto : {{transaction['crypto']}} $</span></div>
+        <br>
+        <div class="tex" style="padding-bottom: 5px;"><span class="text_content">ID Transaction : {{transaction['idTransaction']}}</span></div>
+
+       
+        </div>
+        <div class="button">
+          <ion-button shape="round" class="button-content" (click)="reprendre(transaction['id'])">Reconduire</ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

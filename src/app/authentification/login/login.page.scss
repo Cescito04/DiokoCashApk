@@ -1,0 +1,140 @@
+.container {
+  height: auto;
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+  background-image: url(/assets/tuto/Background.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 75px;
+  
+}
+
+.content{
+vertical-align: middle;
+}
+
+.icon{
+  margin-top: -5px;
+  width: 30px;
+}
+.icon2{
+  margin-top: -5px;
+  width: 20px;
+}
+
+
+.col_icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item{
+  background-color: #EE7160;
+  border: 3px solid white;
+  border-radius: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 50px;
+  margin-top: 10px;
+}
+
+ion-input{
+  font-size: 18px;
+
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  color: white !important;
+  margin-top: -3px;
+}
+
+.label{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.span_label{
+  font-size: 16px;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  color: white !important;
+}
+
+.button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.button-content {
+  color: #EE7160 !important;
+  --background: white;
+  --ion-font-family:  'avnext'!important;
+  font-family:  'avnext' !important;
+  height: 45px;
+  width: 170px;
+  font-size: 16px;
+  text-transform: none;
+}
+
+
+ion-label{
+    color: white!important; //change to whatever colour you want here
+    
+  }
+
+  .div_conn{
+      width: 100%;
+      padding-top: 30%;
+      padding-bottom: 50px;
+      text-align: center;
+  }
+
+  .connexion{
+      font-weight: bold;
+      font-size: 22px;
+      text-align: center;
+  }
+
+  .row_mdp{
+      display: flex;
+      align-items: center;
+      padding-top: 50px;
+
+  }
+
+  .col_row_mdp{
+      display: flex;
+      justify-content: center;
+  }
+
+  .underline{
+      font-size: 14px;
+      text-decoration: underline;
+      --ion-font-family:  'avnext'!important;
+      font-family:  'avnext' !important;
+  }
+
+
+  @media (min-device-width: 320px) and (max-device-width: 369px) { 
+
+
+    .underline{
+      font-size: 12px;
+    }
+
+  }
+
+  .dlogo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .logo{
+    width: 90px;
+  }
