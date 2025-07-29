@@ -139,13 +139,11 @@ export class RegisterPage implements OnInit {
           localStorage.removeItem('token');
           if (data['token']) {
             localStorage.setItem('token',data['token']);
-            
             // Récupérer et sauvegarder les données utilisateur
             this.auth.check_auth().subscribe((user: any) => {
               localStorage.setItem('user', JSON.stringify(user));
               loading.dismiss();
-              // Afficher le popup de vérification d'identité après inscription réussie
-              this.showIdVerification = true;
+              this.router.navigateByUrl('/home');
             });
           } else{
             const toast = await this.toastCtrl.create({message: data['message'], duration : 3000 , color: 'dark'});

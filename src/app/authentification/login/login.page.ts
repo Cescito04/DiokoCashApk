@@ -51,13 +51,7 @@ password: new FormControl('', [Validators.required]),
         this.auth.check_auth().subscribe(async (user: any) => {
           // Sauvegarder les données utilisateur dans le localStorage
           localStorage.setItem('user', JSON.stringify(user));
-          
-          if (user.status !== 'id_verified' && user.status !== 'pending_id_review') {
-            this.showIdVerification = true;
-            // Ne pas naviguer immédiatement, attendre que l'utilisateur ferme l'overlay
-          } else {
-            this.router.navigateByUrl('/');
-          }
+          this.router.navigateByUrl('/');
         });
       },
       async () => {
