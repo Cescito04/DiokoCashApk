@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras } from '@angular/router';
-import { IonModal, NavController } from '@ionic/angular';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { IonModal, NavController, ToastController } from '@ionic/angular';
 import { RequestService } from 'src/app/services/request.service';
 import { Contacts } from '@capacitor-community/contacts';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -30,15 +30,15 @@ export class TransactionPage implements OnInit {
   maxlength_d = 9;
   length_b = 9;
   maxlength_b = 9;
-  contacts : any;
-  allContacts : any;
+  contacts : any = [];
+  allContacts : any = [];
   favori : any;
   @ViewChild('confirmModal') confirmModal: IonModal;
   @ViewChild(IonModal) ContactMdal: IonModal;
   isModalOpen = false;
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
-  constructor(private reqService: RequestService, private route: ActivatedRoute,private navCtrl: NavController) {
+  constructor(private reqService: RequestService, private route: ActivatedRoute,private navCtrl: NavController, private toastCtrl: ToastController, private router: Router) {
     this.donnees = JSON.parse(this.route.snapshot.params['data']);
     if (this.donnees.service_1 == 'Orange Money CI' || this.donnees.service_1 == 'Moov CI') {
       this.length_d = 8;
@@ -80,8 +80,21 @@ export class TransactionPage implements OnInit {
 
   ngOnInit() {
     this.reqService.Numeros().subscribe(
-      async (data: string) => {
-        this.destinataire = data['numeros'][0].numero; 
+      async (data: any) => {
+        if (data && data['numeros'] && Array.isArray(data['numeros']) && data['numeros'].length > 0 && data['numeros'][0].numero) {
+          this.destinataire = data['numeros'][0].numero;
+        } else {
+          this.destinataire = '';
+        }
+      },
+      async error => {
+        console.log('Erreur API Numeros:', error);
+        if (error.status === 401) {
+          // Token expiré, rediriger vers login
+          localStorage.removeItem('token');
+          this.router.navigateByUrl('/login');
+          return;
+        }
       }
     );
   }
@@ -147,17 +160,20 @@ export class TransactionPage implements OnInit {
   }
 
   filter(value: string) {
-    let contacts: any[];    
-    if (!value.trim()) {
-    contacts = this.allContacts;
+    let contacts: any[];
+    if (!value || typeof value !== 'string' || !value.trim()) {
+      contacts = this.allContacts;
     } else {
       const searchTerm = value.toLowerCase().trim();
-    contacts = this.contacts.filter(contact =>
-      contact.name?.display.toLowerCase().includes(searchTerm) ||
-        contact.phones.some(phone => phone.number.includes(searchTerm))
-      );
+      if (this.contacts && Array.isArray(this.contacts)) {
+        contacts = this.contacts.filter(contact =>
+          contact.name?.display?.toLowerCase().includes(searchTerm) ||
+          (contact.phones && contact.phones.some(phone => phone.number && phone.number.includes(searchTerm)))
+        );
+      } else {
+        contacts = [];
+      }
     }
-
     this.contacts = contacts;
   }
 
@@ -219,16 +235,39 @@ export class TransactionPage implements OnInit {
       service: this.donnees.service_2,
     }
     if (this.recu == null) {
-        this. recu2 = null ;
+        this.recu2 = null;
     } else if(this.recu == 0){
       this.recu2 = 0;
     } else {
     this.reqService.Com(this.recu, "recu", this.form).subscribe(
-    async (data: string) => {
-      this.recu2 = data+-this.recu; 
+    async (data: any) => {
+      // Gestion correcte de la réponse API
+      const montantFinal = typeof data === 'object' ? data.montant : parseFloat(data);
+      this.recu2 = montantFinal - this.recu; 
       this.test = true;
       this.valider(this.recu2);
-    });  
+    },
+    async error => {
+      console.log('Erreur API:', error);
+      if (error.status === 401) {
+        // Token expiré, rediriger vers login
+        localStorage.removeItem('token');
+        this.router.navigateByUrl('/login');
+        return;
+      }
+      
+      let message = 'Erreur inconnue';
+      if (error.status === 404 && error.error && error.error.error) {
+        message = error.error.error;
+      }
+      const toast = await this.toastCtrl.create({
+        message,
+        duration: 3000,
+        color: 'danger'
+      });
+      toast.present();
+    }
+    );  
     }
     this.test = true;
   //this.recu2 = parseFloat(valu) + 500;

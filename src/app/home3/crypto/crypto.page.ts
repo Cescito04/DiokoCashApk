@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonModal, NavController, ToastController } from '@ionic/angular';
 import { RequestService } from 'src/app/services/request.service';
 
@@ -63,7 +63,7 @@ export class CryptoPage implements OnInit {
   numero;
   @ViewChild('confirmModal') confirmModal: IonModal;
   constructor(private reqService: RequestService, private route: ActivatedRoute,private navCtrl: NavController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController, private router: Router) {
 
       this.form2 = new FormGroup({
         destinataire: new FormControl(this.numero, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(this.length_d), Validators.maxLength(this.maxlength_d)]),
@@ -129,16 +129,39 @@ export class CryptoPage implements OnInit {
       service: this.donnees.service_2,
     }
     if (this.recu == null) {
-        this. recu2 = null ;
+        this.recu2 = null;
     } else if(this.recu == 0){
       this.recu2 = 0;
     } else {
     this.reqService.Com(this.recu, "recu", this.form).subscribe(
-    async (data: string) => {
-      this.recu2 = data+-this.recu; 
+    async (data: any) => {
+      // Gestion correcte de la réponse API
+      const montantFinal = typeof data === 'object' ? data.montant : parseFloat(data);
+      this.recu2 = montantFinal - this.recu; 
       this.test = true;
       this.valider(this.recu2);
-    });  
+    },
+    async error => {
+      console.log('Erreur API Crypto:', error);
+      if (error.status === 401) {
+        // Token expiré, rediriger vers login
+        localStorage.removeItem('token');
+        this.router.navigateByUrl('/login');
+        return;
+      }
+      
+      let message = 'Erreur inconnue';
+      if (error.status === 404 && error.error && error.error.error) {
+        message = error.error.error;
+      }
+      const toast = await this.toastCtrl.create({
+        message,
+        duration: 3000,
+        color: 'danger'
+      });
+      toast.present();
+    }
+    );  
     }
     this.test = true;
   //this.recu2 = parseFloat(valu) + 500;

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Form } from "../services/transfert/form.model";
 import { Transfert } from "./request.model";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -20,26 +21,29 @@ export class RequestService{
 
     Transfert(credentials: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Transfert):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
-          let params = new HttpParams().set('debit', credentials.debit)
-                                        .set('beneficiaire', credentials.beneficiaire)
-                                        .set('provenance', credentials.provenance)
-                                        .set('montant',credentials.initial)
-                                        .set('service',credentials.service)
-                                        .set('initial', credentials.montant)
-                                        .set('step', credentials.step)
-                                        .set('trans_id', credentials.trans_id)
-                                        .set('otp', credentials.otp)
-                                        .set('otp_validation', credentials.validation_otp)
-                                        .set('transaction_id', credentials.transaction_id)
-                                        .set('version', this.version);
+        let params = new HttpParams()
+            .set('debit', credentials.debit || '')
+            .set('beneficiaire', credentials.beneficiaire || '')
+            .set('provenance', credentials.provenance || '')
+            .set('montant', credentials.initial ? parseFloat(credentials.initial.toString()) : 0)
+            .set('service', credentials.service || '')
+            .set('initial', credentials.montant ? parseFloat(credentials.montant.toString()) : 0)
+            .set('step', credentials.step || '')
+            .set('trans_id', credentials.trans_id || '')
+            .set('otp', credentials.otp || '')
+            .set('otp_validation', credentials.validation_otp || '')
+            .set('transaction_id', credentials.transaction_id || '')
+            .set('version', this.version);
         return this.http.get(`${this.apiUrl}/transferts`,{headers,params: params})
     }
 
     TransfertMultiple(credentials: Transfert) {
       const token = localStorage.getItem('token');
+      console.log('Token utilisé pour l\'API (TransfertMultiple):', token);
       const headers = new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
@@ -60,6 +64,7 @@ export class RequestService{
 
     Find(credentials: Transfert) {
       const token = localStorage.getItem('token');
+      console.log('Token utilisé pour l\'API (Find):', token);
       const headers = new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
@@ -70,6 +75,7 @@ export class RequestService{
 
     Credit(credentials: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Credit):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -91,30 +97,33 @@ export class RequestService{
 
     Facture(credentials: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Facture):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
-          let params = new HttpParams().set('debit', credentials.debit)
-                                        .set('beneficiaire', credentials.beneficiaire)
-                                        .set('provenance', credentials.provenance)
-                                        .set('montant',credentials.initial)
-                                        .set('nom',credentials.nom)
-                                        .set('service',credentials.service)
-                                        .set('initial', credentials.montant)
-                                        .set('step', credentials.step)
-                                        .set('trans_id', credentials.trans_id)
-                                        .set('otp', credentials.otp)
-                                        .set('com', credentials.commission)
-                                        .set('phone', credentials.phone)
-                                        .set('otp_validation', credentials.validation_otp)
-                                        .set('version', this.version)
-                                        .set('codeParrain', credentials.code_parrain)
-                                        .set('nombre', credentials.nombre);
+        let params = new HttpParams()
+            .set('debit', credentials.debit || '')
+            .set('beneficiaire', credentials.beneficiaire || '')
+            .set('provenance', credentials.provenance || '')
+            .set('montant', credentials.initial ? parseFloat(credentials.initial.toString()) : 0)
+            .set('nom', credentials.nom || '')
+            .set('service', credentials.service || '')
+            .set('initial', credentials.montant ? parseFloat(credentials.montant.toString()) : 0)
+            .set('step', credentials.step || '')
+            .set('trans_id', credentials.trans_id || '')
+            .set('otp', credentials.otp || '')
+            .set('com', credentials.commission ? parseFloat(credentials.commission.toString()) : 0)
+            .set('phone', credentials.phone || '')
+            .set('otp_validation', credentials.validation_otp || '')
+            .set('version', this.version)
+            .set('codeParrain', credentials.code_parrain || '')
+            .set('nombre', credentials.nombre ? parseFloat(credentials.nombre.toString()) : 0);
         return this.http.get(`${this.apiUrl}/factures`,{headers,params: params})
     }
 
     Multiple(credentials: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Multiple):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -125,6 +134,7 @@ export class RequestService{
 
     Transaction (id){
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Transaction):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -135,6 +145,7 @@ export class RequestService{
 
     Trans(periode: string) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Trans):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -144,6 +155,7 @@ export class RequestService{
 
     Infos(){
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Infos):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -152,6 +164,7 @@ export class RequestService{
 
     Reverifier(id: string) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Reverifier):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -161,6 +174,7 @@ export class RequestService{
 
     Com(valeur: string, type: string, serv: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Com):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -171,6 +185,7 @@ export class RequestService{
 
     ComCredit(valeur: string, serv: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (ComCredit):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -181,6 +196,7 @@ export class RequestService{
 
     Com_fact(valeur: string, type: string, from: string, to: string) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Com_fact):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -190,6 +206,7 @@ export class RequestService{
 
     Com_woyof(valeur: string, type: string, serv: string) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Com_woyof):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -201,6 +218,7 @@ export class RequestService{
 
     OrangeMoney(): Observable<Form[]> {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (OrangeMoney):', token);
         // const token = "2|3QqCn34ISR7qNQYDrYWcEK22h3bkHLUra56RkOSp";
         const headers = new HttpHeaders({
             
@@ -210,8 +228,8 @@ export class RequestService{
     }
 
     EMoney(credentials: Transfert) {
-
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (EMoney):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -223,6 +241,7 @@ export class RequestService{
 
     Woyofal(credentials: Transfert) {
         const token = localStorage.getItem('token');
+        console.log('Token utilisé pour l\'API (Woyofal):', token);
         const headers = new HttpHeaders({
             'Authorization': 'Bearer ' + token
           })
@@ -235,6 +254,7 @@ export class RequestService{
 
     Confiance(credentials: Transfert) {
       const token = localStorage.getItem('token');
+      console.log('Token utilisé pour l\'API (Confiance):', token);
       const headers = new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
@@ -252,6 +272,7 @@ export class RequestService{
 
   Numeros() {
     const token = localStorage.getItem('token');
+    console.log('Token utilisé pour l\'API (Numeros):', token);
     const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + token
       })
@@ -260,6 +281,7 @@ export class RequestService{
 
 otp_favoris(indicatif,numero,service) {
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (otp_favoris):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
@@ -271,6 +293,7 @@ otp_favoris(indicatif,numero,service) {
 
 add_favoris(numero, otp, tokeniser) {
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (add_favoris):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
@@ -282,6 +305,7 @@ add_favoris(numero, otp, tokeniser) {
 
 ChangeTransPass(credentials: Transfert) {
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (ChangeTransPass):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
@@ -293,6 +317,7 @@ ChangeTransPass(credentials: Transfert) {
 
 ChangePass(credentials: Transfert) {
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (ChangePass):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
@@ -304,6 +329,7 @@ ChangePass(credentials: Transfert) {
 
 confirm_trans_pass(password, numero) {
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (confirm_trans_pass):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
@@ -327,6 +353,7 @@ confirm_trans_pass(password, numero) {
 
     message(){
       const token = localStorage.getItem('token');
+      console.log('Token utilisé pour l\'API (message):', token);
       const headers = new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
@@ -334,6 +361,7 @@ confirm_trans_pass(password, numero) {
    }
     affiliation(){
       const token = localStorage.getItem('token');
+      console.log('Token utilisé pour l\'API (affiliation):', token);
       const headers = new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
@@ -342,6 +370,7 @@ confirm_trans_pass(password, numero) {
 
     list_affilie(){
       const token = localStorage.getItem('token');
+      console.log('Token utilisé pour l\'API (list_affilie):', token);
       const headers = new HttpHeaders({
           'Authorization': 'Bearer ' + token
         })
@@ -350,6 +379,7 @@ confirm_trans_pass(password, numero) {
 
    usdt(){
     const token = localStorage.getItem('token');
+    console.log('Token utilisé pour l\'API (usdt):', token);
     const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + token
       })
@@ -358,6 +388,7 @@ confirm_trans_pass(password, numero) {
 
  checkParrain (code){
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (checkParrain):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
@@ -368,6 +399,7 @@ confirm_trans_pass(password, numero) {
 
 retraitAffilier(service, beneficiaire, montant) {
   const token = localStorage.getItem('token');
+  console.log('Token utilisé pour l\'API (retraitAffilier):', token);
   const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })

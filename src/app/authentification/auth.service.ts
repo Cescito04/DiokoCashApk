@@ -1,15 +1,15 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "./user.model";
-
+import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class AuthService{
-    private url ="http://localhost:8000/api"
-    constructor(private http: HttpClient){}
+    private url = "http://localhost:8000/api"
+    constructor(private http: HttpClient, private router: Router){}
 
     check_user(user: User){
         return this.http.post(`${this.url}/check_user`, user)
@@ -32,18 +32,39 @@ export class AuthService{
     }
 
     login(credentials: User){
-    
-            return this.http.post(`${this.url}/connexion` , credentials)
+        console.log('=== DEBUG LOGIN ===');
+        console.log('Tentative de connexion pour:', credentials.email);
+        console.log('URL de connexion:', `${this.url}/connexion`);
+        console.log('=== FIN DEBUG LOGIN ===');
+        return this.http.post(`${this.url}/connexion` , credentials)
     }
 
     check_auth(){
         const token = localStorage.getItem('token');
+        console.log('=== DEBUG AUTHENTIFICATION ===');
+        console.log('Token utilisé pour check_auth:', token);
+        console.log('Token existe:', !!token);
+        console.log('Longueur du token:', token ? token.length : 0);
+        
+        if (!token) {
+            console.log('❌ Aucun token trouvé, redirection vers login');
+            this.router.navigateByUrl('/login');
+            return;
+        }
+        
         // const token = "2|3QqCn34ISR7qNQYDrYWcEK22h3bkHLUra56RkOSp";
         const headers = new HttpHeaders({
-            
             'Authorization': 'Bearer ' + token
           })
+        console.log('Headers envoyés:', headers);
+        console.log('URL de l\'API:', `${this.url}/check`);
+        console.log('=== FIN DEBUG AUTHENTIFICATION ===');
         return this.http.get(`${this.url}/check` , {headers})
+    }
+
+    logout() {
+        localStorage.removeItem('token');
+        this.router.navigateByUrl('/login');
     }
 
     update(data: User){

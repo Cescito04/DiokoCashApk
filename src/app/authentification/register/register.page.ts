@@ -47,15 +47,9 @@ export class RegisterPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.auth.check_auth().subscribe(
-      async () => {
-        this.router.navigateByUrl('home');
-      },
-      async () => {
-
-      }
-    );
-
+    // Ne pas vérifier l'authentification sur la page register
+    // car c'est là où l'utilisateur va créer son compte
+    console.log('Page register chargée - pas de vérification d\'authentification');
   }
 
   etape2(){
@@ -140,11 +134,17 @@ export class RegisterPage implements OnInit {
           if (data['token']) {
             localStorage.setItem('token',data['token']);
             // Récupérer et sauvegarder les données utilisateur
-            this.auth.check_auth().subscribe((user: any) => {
-              localStorage.setItem('user', JSON.stringify(user));
+            const authCheck = this.auth.check_auth();
+            if (authCheck) {
+              authCheck.subscribe((user: any) => {
+                localStorage.setItem('user', JSON.stringify(user));
+                loading.dismiss();
+                this.router.navigateByUrl('/home');
+              });
+            } else {
               loading.dismiss();
               this.router.navigateByUrl('/home');
-            });
+            }
           } else{
             const toast = await this.toastCtrl.create({message: data['message'], duration : 3000 , color: 'dark'});
             toast.present();

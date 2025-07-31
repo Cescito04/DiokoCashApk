@@ -16,15 +16,17 @@ export class TutoPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.reqService.check_auth().subscribe(
-      async () => {
-        this.router.navigateByUrl('home');
-      },
-      async () => {
-        
-      }
-    );
-
+    const authCheck = this.reqService.check_auth();
+    if (authCheck) {
+      authCheck.subscribe(
+        async () => {
+          this.router.navigateByUrl('home');
+        },
+        async (error) => {
+          console.log('Erreur d\'authentification dans tuto:', error);
+        }
+      );
+    }
   }
 
 }

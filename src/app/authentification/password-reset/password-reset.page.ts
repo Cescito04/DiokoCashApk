@@ -41,15 +41,9 @@ export class PasswordResetPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.auth.check_auth().subscribe(
-      async () => {
-        this.router.navigateByUrl('home');
-      },
-      async () => {
-
-      }
-    );
-
+    // Ne pas vérifier l'authentification sur la page password-reset
+    // car c'est là où l'utilisateur va réinitialiser son mot de passe
+    console.log('Page password-reset chargée - pas de vérification d\'authentification');
   }
 
   etape2(){

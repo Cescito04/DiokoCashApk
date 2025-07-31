@@ -16,7 +16,6 @@ export class LoginPage implements OnInit {
   constructor(private auth: AuthService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private reqService: AuthService,
     private router: Router,
     private modalCtrl: ModalController) { }
 form = new FormGroup({
@@ -28,15 +27,21 @@ password: new FormControl('', [Validators.required]),
   }
 
   ionViewDidEnter(){
-    this.reqService.check_auth().subscribe(
-      async () => {
-        this.router.navigateByUrl('home');
-      },
-      async () => {
-
-      }
-    );
-
+    // Vérifier si l'utilisateur est déjà connecté
+    const authCheck = this.auth.check_auth();
+    if (authCheck) {
+      authCheck.subscribe(
+        async () => {
+          // Si déjà connecté, rediriger vers home
+          this.router.navigateByUrl('home');
+        },
+        async (error) => {
+          console.log('Utilisateur non connecté, rester sur la page login');
+        }
+      );
+    } else {
+      console.log('Pas de token, rester sur la page login');
+    }
   }
 
   async confirm(){
@@ -45,8 +50,16 @@ password: new FormControl('', [Validators.required]),
     this.auth.login(this.form.value).subscribe(
       async (data: any) => {
         loading.dismiss();
+        console.log('=== DEBUG CONNEXION RÉUSSIE ===');
+        console.log('Réponse du serveur:', data);
+        console.log('Token reçu:', data['token']);
+        
         localStorage.removeItem('token');
         localStorage.setItem('token',data['token']);
+        
+        console.log('Token sauvegardé dans localStorage:', localStorage.getItem('token'));
+        console.log('=== FIN DEBUG CONNEXION ===');
+        
         // Vérifier le statut utilisateur
         this.auth.check_auth().subscribe(async (user: any) => {
           // Sauvegarder les données utilisateur dans le localStorage
@@ -54,7 +67,13 @@ password: new FormControl('', [Validators.required]),
           this.router.navigateByUrl('/');
         });
       },
-      async () => {
+      async (error) => {
+        console.log('=== ERREUR DE CONNEXION ===');
+        console.log('Erreur:', error);
+        console.log('Status:', error.status);
+        console.log('Message:', error.error);
+        console.log('=== FIN ERREUR ===');
+        
         const alert = await this.toastCtrl.create({message: "Ces données ne correspondent pas à nos enregstrements...", duration: 3000, color: 'dark'});
         alert.present();
         loading.dismiss();

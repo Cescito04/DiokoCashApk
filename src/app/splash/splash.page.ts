@@ -17,16 +17,22 @@ export class SplashPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.reqService.check_auth().subscribe(
-      async () => {
-        this.router.navigateByUrl('home/tabs/tab1');
-      },
-      async () => {
-        localStorage.removeItem('token');
-        this.router.navigateByUrl('login');
-      }
-    );
-
+    const authCheck = this.reqService.check_auth();
+    if (authCheck) {
+      authCheck.subscribe(
+        async () => {
+          this.router.navigateByUrl('home/tabs/tab1');
+        },
+        async (error) => {
+          console.log('Erreur d\'authentification dans splash:', error);
+          localStorage.removeItem('token');
+          this.router.navigateByUrl('login');
+        }
+      );
+    } else {
+      // Pas de token, rediriger vers login
+      this.router.navigateByUrl('login');
+    }
   }
 
 }
