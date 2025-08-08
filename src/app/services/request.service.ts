@@ -9,7 +9,7 @@ import { Transfert } from "./request.model";
 })
 
 export class RequestService{
-    apiUrl = 'http://localhost:8000/api';
+    apiUrl = 'https://privacy.diokocash.com/api';
     version = 1;
 
     constructor(private http: HttpClient){}

@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 })
 
 export class AuthService{
-    private url = "http://localhost:8000/api"
+    private url = "https://privacy.diokocash.com/api"
     constructor(private http: HttpClient, private router: Router){}
 
     check_user(user: User){
