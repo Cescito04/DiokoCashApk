@@ -22,25 +22,44 @@
     <!-- Content -->
     <div class="overlay-content">
       <div class="overlay-instructions">
-        <p>Pour sécuriser votre compte, merci de fournir une pièce d'identité <b>et</b> un selfie.</p>
+        <p>Pour sécuriser votre compte, merci de fournir le <b>recto</b> et le <b>verso</b> de votre pièce d'identité, ainsi qu'un <b>selfie</b>.</p>
       </div>
       
       <div class="overlay-form">
-        <!-- Carte d'identité -->
+        <!-- Carte d'identité (recto) -->
         <div class="upload-section">
           <div class="upload-header">
             <ion-icon name="card-outline" class="upload-icon"></ion-icon>
             <div class="upload-info">
-              <h3 class="upload-title">Pièce d'identité</h3>
-              <p class="upload-subtitle">CNI (jpeg, png, jpg, pdf)</p>
+              <h3 class="upload-title">CNI - Recto</h3>
+              <p class="upload-subtitle">jpeg, png, jpg, pdf</p>
             </div>
           </div>
-          <div class="upload-area" [class.has-file]="idCardFile">
-            <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardChange($event)" class="file-input" id="overlay-id-card" />
-            <label for="overlay-id-card" class="file-label">
+          <div class="upload-area" [class.has-file]="idCardFrontFile">
+            <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardFrontChange($event)" class="file-input" id="overlay-id-card-front" />
+            <label for="overlay-id-card-front" class="file-label">
               <ion-icon name="cloud-upload-outline" class="upload-cloud-icon"></ion-icon>
-              <span class="upload-text" *ngIf="!idCardFile">Choisir un fichier</span>
-              <span class="upload-text selected" *ngIf="idCardFile">{{ idCardFile.name }}</span>
+              <span class="upload-text" *ngIf="!idCardFrontFile">Choisir un fichier</span>
+              <span class="upload-text selected" *ngIf="idCardFrontFile">{{ idCardFrontFile.name }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Carte d'identité (verso) -->
+        <div class="upload-section">
+          <div class="upload-header">
+            <ion-icon name="card-outline" class="upload-icon"></ion-icon>
+            <div class="upload-info">
+              <h3 class="upload-title">CNI - Verso</h3>
+              <p class="upload-subtitle">jpeg, png, jpg, pdf</p>
+            </div>
+          </div>
+          <div class="upload-area" [class.has-file]="idCardBackFile">
+            <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardBackChange($event)" class="file-input" id="overlay-id-card-back" />
+            <label for="overlay-id-card-back" class="file-label">
+              <ion-icon name="cloud-upload-outline" class="upload-cloud-icon"></ion-icon>
+              <span class="upload-text" *ngIf="!idCardBackFile">Choisir un fichier</span>
+              <span class="upload-text selected" *ngIf="idCardBackFile">{{ idCardBackFile.name }}</span>
             </label>
           </div>
         </div>
@@ -77,7 +96,7 @@
         <!-- Bouton de soumission -->
         <button 
           (click)="submit()" 
-          [disabled]="loading || !idCardFile || !selfieFile" 
+          [disabled]="loading || !idCardFrontFile || !idCardBackFile || !selfieFile" 
           class="overlay-submit">
           <ion-icon name="send-outline" *ngIf="!loading" class="submit-icon"></ion-icon>
           <span *ngIf="loading" class="loading-spinner">⟳</span>

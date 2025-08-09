@@ -10,7 +10,8 @@ export class IdVerificationOverlayComponent {
   @Input() isVisible = false;
   @Output() close = new EventEmitter<string>(); // Émet 'closed' ou 'submitted'
 
-  idCardFile: File | null = null;
+  idCardFrontFile: File | null = null;
+  idCardBackFile: File | null = null;
   selfieFile: File | null = null;
   loading = false;
   errorMsg = '';
@@ -19,9 +20,8 @@ export class IdVerificationOverlayComponent {
   constructor(private idVerificationService: IdVerificationService) {
   }
 
-  onIdCardChange(event: any) {
-    this.idCardFile = event.target.files[0];
-  }
+  onIdCardFrontChange(event: any) { this.idCardFrontFile = event.target.files[0]; }
+  onIdCardBackChange(event: any) { this.idCardBackFile = event.target.files[0]; }
 
   onSelfieChange(event: any) {
     this.selfieFile = event.target.files[0];
@@ -31,21 +31,23 @@ export class IdVerificationOverlayComponent {
     this.errorMsg = '';
     this.successMsg = '';
     
-    if (!this.idCardFile || !this.selfieFile) {
-      this.errorMsg = 'Veuillez sélectionner la CNI et le selfie.';
+    if (!this.idCardFrontFile || !this.idCardBackFile || !this.selfieFile) {
+      this.errorMsg = 'Veuillez sélectionner le recto, le verso et le selfie.';
       return;
     }
     
     this.loading = true;
     const formData = new FormData();
-    formData.append('id_card', this.idCardFile);
+    formData.append('id_card_front', this.idCardFrontFile);
+    formData.append('id_card_back', this.idCardBackFile);
     formData.append('selfie', this.selfieFile);
     
     this.idVerificationService.submitIDVerification(formData).subscribe({
       next: (res) => {
         this.successMsg = 'Vérification soumise avec succès !';
         this.loading = false;
-        this.idCardFile = null;
+        this.idCardFrontFile = null;
+        this.idCardBackFile = null;
         this.selfieFile = null;
         
         // Mettre à jour le statut utilisateur localement pour éviter que le popup réapparaisse
