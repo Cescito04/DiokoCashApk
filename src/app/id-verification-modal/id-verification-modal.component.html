@@ -1,12 +1,21 @@
 <ion-header class="id-modal-header">
-  <ion-toolbar color="light">
-    <ion-title class="id-modal-title">
-      <ion-icon name="shield-checkmark-outline" class="id-modal-icon"></ion-icon>
-      Vérification d'identité
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="close()">Fermer</ion-button>
-    </ion-buttons>
+  <ion-toolbar color="transparent">
+    <div class="header-content">
+      <div class="header-logo">
+        <div class="dioko-logo">
+          <span class="logo-text">DIOKO</span>
+        </div>
+      </div>
+      <ion-title class="id-modal-title">
+        <ion-icon name="shield-checkmark-outline" class="id-modal-icon"></ion-icon>
+        Vérification d'identité
+      </ion-title>
+      <ion-buttons slot="end" class="close-button-container">
+        <ion-button (click)="close()" class="close-button">
+          <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -15,20 +24,64 @@
     <p>Pour sécuriser votre compte, merci de fournir une pièce d'identité <b>et</b> un selfie.</p>
   </div>
   <div class="id-modal-form">
-    <label class="id-modal-label">
-      <ion-icon name="card-outline" class="id-modal-label-icon"></ion-icon>
-      CNI (jpeg, png, jpg, pdf)
-      <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardChange($event)" class="id-modal-file" />
-    </label>
-    <label class="id-modal-label">
-      <ion-icon name="person-circle-outline" class="id-modal-label-icon"></ion-icon>
-      Selfie (jpeg, png, jpg)
-      <input type="file" accept=".jpeg,.jpg,.png" (change)="onSelfieChange($event)" class="id-modal-file" />
-    </label>
-    <div *ngIf="errorMsg" class="id-modal-error">{{ errorMsg }}</div>
-    <div *ngIf="successMsg" class="id-modal-success">{{ successMsg }}</div>
-    <button (click)="submit()" [disabled]="loading" class="id-modal-submit">
-      {{ loading ? 'Envoi en cours...' : 'Soumettre' }}
-    </button>
+    <!-- Carte d'identité -->
+    <div class="upload-section">
+      <div class="upload-header">
+        <ion-icon name="card-outline" class="upload-icon"></ion-icon>
+        <div class="upload-info">
+          <h3 class="upload-title">Pièce d'identité</h3>
+          <p class="upload-subtitle">CNI (jpeg, png, jpg, pdf)</p>
+        </div>
+      </div>
+      <div class="upload-area" [class.has-file]="idCardFile">
+        <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardChange($event)" class="file-input" id="id-card-input" />
+        <label for="id-card-input" class="file-label">
+          <ion-icon name="cloud-upload-outline" class="upload-cloud-icon"></ion-icon>
+          <span class="upload-text" *ngIf="!idCardFile">Choisir un fichier</span>
+          <span class="upload-text selected" *ngIf="idCardFile">{{ idCardFile.name }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Selfie -->
+    <div class="upload-section">
+      <div class="upload-header">
+        <ion-icon name="person-circle-outline" class="upload-icon"></ion-icon>
+        <div class="upload-info">
+          <h3 class="upload-title">Photo selfie</h3>
+          <p class="upload-subtitle">Selfie (jpeg, png, jpg)</p>
+        </div>
+      </div>
+      <div class="upload-area" [class.has-file]="selfieFile">
+        <input type="file" accept=".jpeg,.jpg,.png" (change)="onSelfieChange($event)" class="file-input" id="selfie-input" />
+        <label for="selfie-input" class="file-label">
+          <ion-icon name="cloud-upload-outline" class="upload-cloud-icon"></ion-icon>
+          <span class="upload-text" *ngIf="!selfieFile">Choisir un fichier</span>
+          <span class="upload-text selected" *ngIf="selfieFile">{{ selfieFile.name }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div *ngIf="errorMsg" class="id-modal-error">
+      <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+      {{ errorMsg }}
+    </div>
+    <div *ngIf="successMsg" class="id-modal-success">
+      <ion-icon name="checkmark-circle-outline" class="success-icon"></ion-icon>
+      {{ successMsg }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <ion-button 
+      (click)="submit()" 
+      [disabled]="loading || !idCardFile || !selfieFile" 
+      class="submit-button"
+      expand="block"
+      shape="round">
+      <ion-icon name="send-outline" slot="start" *ngIf="!loading"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="loading" slot="start"></ion-spinner>
+      {{ loading ? 'Envoi en cours...' : 'Soumettre les documents' }}
+    </ion-button>
   </div>
 </ion-content>

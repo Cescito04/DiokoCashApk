@@ -62,7 +62,7 @@ Tu pourras ensuite ouvrir le projet dans Android Studio ou Xcode pour le build n
 
 ## Configuration de l'API
 - L'URL de l'API backend est configurée dans les services Angular (ex : `auth.service.ts`, `id-verification.service.ts`).
-- Production : `https://privacy.diokocash.com/api`
+- Production : `http://127.0.0.1:8000/api`
 
 ## Dépendances principales
 - Angular 13

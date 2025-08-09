@@ -5,12 +5,17 @@
   <div class="overlay-popup" *ngIf="isVisible">
     <!-- Header -->
     <div class="overlay-header">
+      <div class="header-logo">
+        <div class="dioko-logo">
+          <span class="logo-text">DIOKO</span>
+        </div>
+      </div>
       <div class="overlay-title">
         <ion-icon name="shield-checkmark-outline" class="overlay-icon"></ion-icon>
         Vérification d'identité
       </div>
       <button class="overlay-close" (click)="closeOverlay()">
-        Fermer
+        <ion-icon name="close-outline"></ion-icon>
       </button>
     </div>
 
@@ -21,23 +26,62 @@
       </div>
       
       <div class="overlay-form">
-        <label class="overlay-label">
-          <ion-icon name="card-outline" class="overlay-label-icon"></ion-icon>
-          CNI (jpeg, png, jpg, pdf)
-          <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardChange($event)" class="overlay-file" />
-        </label>
+        <!-- Carte d'identité -->
+        <div class="upload-section">
+          <div class="upload-header">
+            <ion-icon name="card-outline" class="upload-icon"></ion-icon>
+            <div class="upload-info">
+              <h3 class="upload-title">Pièce d'identité</h3>
+              <p class="upload-subtitle">CNI (jpeg, png, jpg, pdf)</p>
+            </div>
+          </div>
+          <div class="upload-area" [class.has-file]="idCardFile">
+            <input type="file" accept=".jpeg,.jpg,.png,.pdf" (change)="onIdCardChange($event)" class="file-input" id="overlay-id-card" />
+            <label for="overlay-id-card" class="file-label">
+              <ion-icon name="cloud-upload-outline" class="upload-cloud-icon"></ion-icon>
+              <span class="upload-text" *ngIf="!idCardFile">Choisir un fichier</span>
+              <span class="upload-text selected" *ngIf="idCardFile">{{ idCardFile.name }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Selfie -->
+        <div class="upload-section">
+          <div class="upload-header">
+            <ion-icon name="person-circle-outline" class="upload-icon"></ion-icon>
+            <div class="upload-info">
+              <h3 class="upload-title">Photo selfie</h3>
+              <p class="upload-subtitle">Selfie (jpeg, png, jpg)</p>
+            </div>
+          </div>
+          <div class="upload-area" [class.has-file]="selfieFile">
+            <input type="file" accept=".jpeg,.jpg,.png" (change)="onSelfieChange($event)" class="file-input" id="overlay-selfie" />
+            <label for="overlay-selfie" class="file-label">
+              <ion-icon name="cloud-upload-outline" class="upload-cloud-icon"></ion-icon>
+              <span class="upload-text" *ngIf="!selfieFile">Choisir un fichier</span>
+              <span class="upload-text selected" *ngIf="selfieFile">{{ selfieFile.name }}</span>
+            </label>
+          </div>
+        </div>
         
-        <label class="overlay-label">
-          <ion-icon name="person-circle-outline" class="overlay-label-icon"></ion-icon>
-          Selfie (jpeg, png, jpg)
-          <input type="file" accept=".jpeg,.jpg,.png" (change)="onSelfieChange($event)" class="overlay-file" />
-        </label>
+        <!-- Messages -->
+        <div *ngIf="errorMsg" class="overlay-error">
+          <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+          {{ errorMsg }}
+        </div>
+        <div *ngIf="successMsg" class="overlay-success">
+          <ion-icon name="checkmark-circle-outline" class="success-icon"></ion-icon>
+          {{ successMsg }}
+        </div>
         
-        <div *ngIf="errorMsg" class="overlay-error">{{ errorMsg }}</div>
-        <div *ngIf="successMsg" class="overlay-success">{{ successMsg }}</div>
-        
-        <button (click)="submit()" [disabled]="loading" class="overlay-submit">
-          {{ loading ? 'Envoi en cours...' : 'Soumettre' }}
+        <!-- Bouton de soumission -->
+        <button 
+          (click)="submit()" 
+          [disabled]="loading || !idCardFile || !selfieFile" 
+          class="overlay-submit">
+          <ion-icon name="send-outline" *ngIf="!loading" class="submit-icon"></ion-icon>
+          <span *ngIf="loading" class="loading-spinner">⟳</span>
+          {{ loading ? 'Envoi en cours...' : 'Soumettre les documents' }}
         </button>
       </div>
     </div>

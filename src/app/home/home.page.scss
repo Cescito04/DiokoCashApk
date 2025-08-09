@@ -1,5 +1,9 @@
 
 
+ion-content {
+    position: relative;
+}
+
 .container {
     height: 100vh;
     width: 100%;
@@ -82,7 +86,9 @@
 .histo {
     width: 65px;
     margin-left: 30px;
-    padding-top: 45px;
+    padding-top: 90px; /* Décaler vers le bas pour éviter la superposition avec les banners */
+    position: relative;
+    z-index: 1001; /* S'assurer qu'il reste au-dessus des banners */
 }
 
 .reglage {
@@ -91,7 +97,8 @@
     right: 0;
     top: 0;
     padding-right: 30px;
-    padding-top: 45px;
+    padding-top: 90px; /* Décaler vers le bas pour éviter la superposition avec les banners */
+    z-index: 1001; /* S'assurer qu'il reste au-dessus des banners */
 }
 
 .cadre {
@@ -310,3 +317,308 @@ h6{
     font-size: 18px;
     text-transform: none;
   }
+
+// Styles pour les banners de vérification d'identité (version compacte)
+.id-reminder-banner {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-left: 4px solid #ff9800;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);
+  z-index: 1000;
+  animation: slideInDown 0.3s ease;
+}
+
+.banner-content {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.banner-icon {
+  flex-shrink: 0;
+  
+  ion-icon {
+    font-size: 24px;
+    color: #ff9800;
+  }
+}
+
+.banner-text {
+  flex: 1;
+  text-align: left;
+}
+
+.banner-title {
+  font-family: 'avnext', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #e65100;
+  margin: 0 0 4px 0;
+}
+
+.banner-message {
+  font-family: 'avnext', sans-serif;
+  font-size: 11px;
+  color: #bf360c;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.verify-button {
+  --background: #ff9800;
+  --background-hover: #f57c00;
+  --color: white;
+  --border-radius: 8px;
+  font-family: 'avnext', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: none;
+  height: 32px;
+  width: auto;
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+.dismiss-button {
+  --color: #666;
+  font-family: 'avnext', sans-serif;
+  font-size: 10px;
+  text-transform: none;
+  height: 32px;
+  width: auto;
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+// Banner de statut après soumission (version compacte)
+.id-status-banner {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-left: 4px solid #2196f3;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.15);
+  z-index: 1000;
+  animation: slideInDown 0.3s ease;
+  
+  // Variante pour statut approuvé
+  &.approved {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+    border-left-color: #4caf50;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+  }
+  
+  // Variante pour statut rejeté
+  &.rejected {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border-left-color: #f44336;
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.15);
+  }
+}
+
+.status-content {
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-direction: column;
+  
+  // Layout horizontal pour les petits contenus
+  &:not(.has-actions) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.status-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.status-close {
+  align-self: flex-start;
+  margin-top: -4px;
+  position: relative;
+  z-index: 1002; // Au-dessus des autres éléments
+}
+
+.close-button {
+  --color: #666;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --padding-top: 4px;
+  --padding-bottom: 4px;
+  height: 32px;
+  width: 32px;
+  position: relative;
+  z-index: 1003; // Très élevé pour capturer les clics
+  
+  ion-icon {
+    font-size: 18px;
+    pointer-events: none; // L'icône ne capture pas les événements
+  }
+  
+  &:hover {
+    --color: #333;
+  }
+  
+  // S'assurer que le bouton capture les clics
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.status-icon {
+  flex-shrink: 0;
+  
+  ion-icon {
+    font-size: 24px;
+    color: #2196f3; // Couleur par défaut (bleu pour "en cours")
+  }
+}
+
+.status-text {
+  flex: 1;
+  text-align: left;
+}
+
+.status-title {
+  font-family: 'avnext', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #1976d2; // Couleur par défaut (bleu pour "en cours")
+  margin: 0 0 4px 0;
+}
+
+.status-message {
+  font-family: 'avnext', sans-serif;
+  font-size: 11px;
+  color: #1565c0; // Couleur par défaut (bleu pour "en cours")
+  line-height: 1.3;
+  margin: 0 0 4px 0;
+}
+
+.retry-message {
+  font-family: 'avnext', sans-serif;
+  font-size: 10px;
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}
+
+.status-actions {
+  margin-top: 8px;
+  
+  ion-button {
+    --height: 32px;
+    --border-radius: 8px;
+    font-family: 'avnext', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: none;
+    --padding-start: 16px;
+    --padding-end: 16px;
+  }
+}
+
+// Styles spécifiques aux différents statuts
+.id-status-banner {
+  // Statut approuvé (vert)
+  &.approved {
+    .status-content {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    
+    .status-icon ion-icon {
+      color: #4caf50;
+    }
+    
+    .status-title {
+      color: #2e7d32;
+    }
+    
+    .status-message {
+      color: #388e3c;
+    }
+    
+    .close-button {
+      --color: #4caf50;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      
+      &:hover {
+        --color: #2e7d32;
+        background: rgba(255, 255, 255, 0.2);
+      }
+      
+      &:active {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+  
+  // Statut rejeté (rouge)
+  &.rejected {
+    .status-icon ion-icon {
+      color: #f44336;
+    }
+    
+    .status-title {
+      color: #c62828;
+    }
+    
+    .status-message {
+      color: #d32f2f;
+    }
+    
+    .status-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+// Animation d'entrée
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .banner-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .verify-button,
+  .dismiss-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}

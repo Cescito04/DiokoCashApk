@@ -1,5 +1,93 @@
 <ion-content class="">
   <ion-img src="assets/hand-swipe.gif" style="position: absolute;margin-top: 60%;width: 60vw;;right: 20vw;z-index: 100;opacity: 0.8;" *ngIf="hand==1 || hand==2"></ion-img>
+  
+  <!-- Banner de rappel pour la vérification d'identité -->
+  <div class="id-reminder-banner" *ngIf="showIdReminderBanner">
+    <div class="banner-content">
+      <div class="banner-icon">
+        <ion-icon name="shield-outline"></ion-icon>
+      </div>
+      <div class="banner-text">
+        <h3 class="banner-title">Vérification requise</h3>
+        <p class="banner-message">Sécurisez votre compte avec une pièce d'identité</p>
+      </div>
+      <div class="banner-actions">
+        <ion-button 
+          size="small" 
+          (click)="reopenIdVerification()"
+          class="verify-button">
+          Vérifier
+        </ion-button>
+        <ion-button 
+          size="small" 
+          fill="clear" 
+          (click)="dismissReminderBanner()"
+          class="dismiss-button">
+          ✕
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Message de statut après soumission -->
+  <div class="id-status-banner" *ngIf="idVerificationStatus === 'submitted'">
+    <div class="status-content">
+      <div class="status-icon">
+        <ion-icon name="hourglass-outline"></ion-icon>
+      </div>
+      <div class="status-text">
+        <h3 class="status-title">Vérification en cours</h3>
+        <p class="status-message">Documents reçus ! Nous reviendrons vers vous sous peu.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Message de validation approuvée -->
+  <div class="id-status-banner approved" *ngIf="idVerificationStatus === 'approved'">
+    <div class="status-content">
+      <div class="status-main">
+        <div class="status-icon">
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+        </div>
+        <div class="status-text">
+          <h3 class="status-title">Vérification terminée</h3>
+          <p class="status-message">Félicitations ! Vos documents sont conformes et votre compte est vérifié.</p>
+        </div>
+      </div>
+      <div class="status-close">
+        <ion-button 
+          fill="clear" 
+          size="small"
+          (click)="dismissSuccessBanner($event)"
+          class="close-button">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Message de rejet avec possibilité de recommencer -->
+  <div class="id-status-banner rejected" *ngIf="idVerificationStatus === 'rejected'">
+    <div class="status-content">
+      <div class="status-icon">
+        <ion-icon name="close-circle" color="danger"></ion-icon>
+      </div>
+      <div class="status-text">
+        <h3 class="status-title">Documents non conformes</h3>
+        <p class="status-message">{{ rejectionReason }}</p>
+        <p class="retry-message">Veuillez soumettre à nouveau vos documents.</p>
+      </div>
+      <div class="status-actions">
+        <ion-button 
+          color="primary" 
+          size="small"
+          (click)="restartVerification()">
+          Refaire la vérification
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  
   <div class="container">
     <div class="menu" [class]="class1">
       <ion-img class="histo" src="assets/MENU/Historique_icon.png" [routerLink]="['/historique']"></ion-img>
@@ -102,7 +190,7 @@
 
   <app-id-verification-overlay 
   [isVisible]="showIdVerification" 
-  (close)="closeIdVerification()">
+  (close)="closeIdVerification($event)">
 </app-id-verification-overlay>
 
 </ion-content>

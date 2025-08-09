@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class IdVerificationService {
-  private apiUrl = 'https://privacy.diokocash.com/api/submit-id-verification';
+  private apiUrl = 'http://127.0.0.1:8000/api/submit-id-verification';
 
   constructor(private http: HttpClient) {}
 

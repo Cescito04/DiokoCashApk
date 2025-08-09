@@ -62,7 +62,10 @@ password: new FormControl('', [Validators.required]),
         
         // Vérifier le statut utilisateur
         this.auth.check_auth().subscribe(async (user: any) => {
-          // Sauvegarder les données utilisateur dans le localStorage
+          // Reset des statuts ID locaux à chaque nouvelle session utilisateur
+          localStorage.removeItem('id_verification_status');
+          localStorage.removeItem('rejection_reason');
+          // Sauvegarder les données utilisateur
           localStorage.setItem('user', JSON.stringify(user));
           this.router.navigateByUrl('/');
         });

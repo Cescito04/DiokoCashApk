@@ -8,7 +8,7 @@ import { IdVerificationService } from '../services/id-verification.service';
 })
 export class IdVerificationOverlayComponent {
   @Input() isVisible = false;
-  @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<string>(); // Émet 'closed' ou 'submitted'
 
   idCardFile: File | null = null;
   selfieFile: File | null = null;
@@ -56,7 +56,7 @@ export class IdVerificationOverlayComponent {
         }
         
         setTimeout(() => {
-          this.closeOverlay();
+          this.closeOverlay('submitted');
         }, 2000);
       },
       error: (err) => {
@@ -72,13 +72,13 @@ export class IdVerificationOverlayComponent {
     });
   }
 
-  closeOverlay() {
-    this.close.emit();
+  closeOverlay(reason: string = 'closed') {
+    this.close.emit(reason);
   }
 
   onBackdropClick(event: any) {
     if (event.target.classList.contains('overlay-backdrop')) {
-      this.closeOverlay();
+      this.closeOverlay('closed');
     }
   }
 } 

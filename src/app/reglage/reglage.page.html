@@ -1,15 +1,18 @@
 
 <ion-content class="">
   <div class="container">
-
-
-  
-  <div class="menu" [class]="class1">
-    <ion-img class="back" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']"></ion-img>
-   <div class="div-span">
-
-   </div>
-  </div>
+    <!-- Header avec logo et titre -->
+    <div class="header">
+      <ion-img class="back-btn" src="assets/MENU-CONVERSION/Bouton_retour_icon.png" [routerLink]="['/home']"></ion-img>
+      <div class="header-content">
+        <div class="logo-container">
+          <div class="logo">
+            <span class="logo-text">DIOKO</span>
+          </div>
+        </div>
+        <h1 class="page-title">Paramètres</h1>
+      </div>
+    </div>
 
   <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
@@ -21,28 +24,51 @@
      </defs>
   </svg>
 
-  
-          <div class="test">
-            <div class="te">
-              <span class="text_r" (click)="password()">Modifier mot(s) de passe</span>
-              <div class="line"></div>
-
-              <span class="text_r" (click)="favoris()">Gestion de mes numéros</span>
-              <div class="line"></div>
-
-              <span class="text_r" [routerLink]="['/affiliation']">Partager l'application</span>
-              <div class="line"></div>
-
-              <span class="text_r">{{ contact }}</span>
-             
-            </div>
-           
-          </div>
-
-  
-      <div class="button">
-        <ion-button shape="round" class="button-content" (click)="deconnexion()" >Se déconnecter</ion-button>
+    <!-- Menu des options -->
+    <div class="settings-menu">
+      <div class="menu-item" (click)="password()">
+        <div class="menu-icon">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+        </div>
+        <span class="menu-text">Modifier mot(s) de passe</span>
+        <ion-icon name="chevron-forward-outline" class="arrow-icon"></ion-icon>
       </div>
+
+      <div class="menu-item" (click)="favoris()">
+        <div class="menu-icon">
+          <ion-icon name="people-outline"></ion-icon>
+        </div>
+        <span class="menu-text">Gestion de mes numéros</span>
+        <ion-icon name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </div>
+
+      <div class="menu-item" [routerLink]="['/affiliation']">
+        <div class="menu-icon">
+          <ion-icon name="share-outline"></ion-icon>
+        </div>
+        <span class="menu-text">Partager l'application</span>
+        <ion-icon name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </div>
+
+      <div class="menu-item contact-item">
+        <div class="menu-icon">
+          <ion-icon name="call-outline"></ion-icon>
+        </div>
+        <span class="menu-text">{{ contact }}</span>
+      </div>
+    </div>
+
+    <!-- Bouton de déconnexion -->
+    <div class="logout-section">
+      <ion-button 
+        shape="round" 
+        class="logout-button" 
+        (click)="deconnexion()"
+        fill="outline">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Se déconnecter
+      </ion-button>
+    </div>
   
    
   

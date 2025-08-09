@@ -19,6 +19,9 @@ private timer;
 @ViewChild(IonModal) ShowModal: IonModal;
 @ViewChild('UpdateModal') UpdateModal: IonModal;
 showIdVerification = false;
+showIdReminderBanner = false;
+idVerificationStatus = 'none'; // 'none', 'closed_without_submit', 'submitted', 'verified', 'approved', 'rejected'
+rejectionReason = ''; // Raison du rejet pour affichage
 
 constructor(private reqService : RequestService,
             private toastCtrl: ToastController,
@@ -48,13 +51,8 @@ constructor(private reqService : RequestService,
     }
 
     async ionViewDidEnter(){
-      // Affichage du popup de vérification d'identité si besoin
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      if (user && user.status !== 'id_verified' && user.status !== 'pending_id_review') {
-        this.showIdVerification = true;
-      } else {
-        this.showIdVerification = false;
-      }
+      // Gestion de la vérification d'identité
+      this.checkIdVerificationStatus();
 
       this.reqService.message().subscribe(
         async (data) => {
@@ -79,8 +77,20 @@ constructor(private reqService : RequestService,
     });
    }
 
-   closeIdVerification() {
+   closeIdVerification(reason: string) {
      this.showIdVerification = false;
+     
+     if (reason === 'closed') {
+       // Utilisateur a fermé sans soumettre - marquer pour afficher le rappel
+       this.idVerificationStatus = 'closed_without_submit';
+       this.showIdReminderBanner = true;
+       localStorage.setItem('id_verification_status', 'closed_without_submit');
+     } else if (reason === 'submitted') {
+       // Documents soumis - afficher message de confirmation
+       this.idVerificationStatus = 'submitted';
+       this.showIdReminderBanner = false;
+       localStorage.setItem('id_verification_status', 'submitted');
+     }
    }
 
     private onMove(detail) {
@@ -136,5 +146,154 @@ constructor(private reqService : RequestService,
    ionViewDidLeave(){
     this.timer.unsubscribe()
    }
+  
+  // Nouvelle méthode pour vérifier le statut de vérification d'identité
+  checkIdVerificationStatus() {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const savedStatus = localStorage.getItem('id_verification_status');
+    
+    if (!user) return;
+    
+    // Vérifier le statut de la vérification d'identité via l'API
+    this.reqService.checkIdVerificationStatus().subscribe(
+      (response) => {
+        if (response && response.status) {
+          this.handleIdVerificationResponse(response);
+        } else {
+          // Si aucune info côté serveur, forcer la vérif côté client
+          this.showIdVerification = true;
+          this.showIdReminderBanner = false;
+          this.idVerificationStatus = 'none';
+        }
+      },
+      (error) => {
+        console.log('Erreur lors de la vérification du statut:', error);
+        this.handleLocalStatus(user, savedStatus);
+      }
+    );
+  }
+  
+  private handleIdVerificationResponse(response: any) {
+    this.showIdVerification = false;
+    this.showIdReminderBanner = false;
+    
+    switch (response.status) {
+      case 'approved':
+      case 'id_verified':
+        this.idVerificationStatus = 'approved';
+        localStorage.setItem('id_verification_status', 'approved');
+        break;
+        
+      case 'rejected':
+        this.idVerificationStatus = 'rejected';
+        this.rejectionReason = response.rejection_reason || 'Documents non conformes aux exigences';
+        localStorage.setItem('id_verification_status', 'rejected');
+        localStorage.setItem('rejection_reason', this.rejectionReason);
+        break;
+        
+      case 'pending':
+      case 'pending_id_review':
+        this.idVerificationStatus = 'submitted';
+        localStorage.setItem('id_verification_status', 'submitted');
+        break;
+        
+      default:
+        this.handleLocalStatus(response, localStorage.getItem('id_verification_status'));
+        break;
+    }
+  }
+  
+  private handleLocalStatus(user: any, savedStatus: string) {
+    // Si l'utilisateur est déjà vérifié ou en cours de review
+    if (user.status === 'id_verified' || user.status === 'pending_id_review') {
+      this.showIdVerification = false;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = user.status === 'id_verified' ? 'approved' : 'submitted';
+      return;
+    }
+    
+    // Si l'utilisateur a un statut qui nécessite une vérification d'identité (nouveau compte, réinitialisé, etc.)
+    if (user.status === 'verify' || user.status === 'pending_otp_verification' || user.status === 'created') {
+      // Reset du localStorage pour les comptes réinitialisés ou nouveaux
+      if (savedStatus === 'submitted' || savedStatus === 'closed_without_submit') {
+        localStorage.removeItem('id_verification_status');
+        localStorage.removeItem('rejection_reason');
+        console.log('localStorage reset: compte réinitialisé ou nouveau');
+      }
+      // Afficher le popup de vérification
+      this.showIdVerification = true;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = 'none';
+      return;
+    }
+    
+    // Gérer les statuts locaux sauvegardés
+    if (savedStatus === 'closed_without_submit') {
+      this.showIdVerification = false;
+      this.showIdReminderBanner = true;
+      this.idVerificationStatus = 'closed_without_submit';
+    } else if (savedStatus === 'submitted') {
+      this.showIdVerification = false;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = 'submitted';
+    } else if (savedStatus === 'rejected') {
+      this.showIdVerification = false;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = 'rejected';
+      this.rejectionReason = localStorage.getItem('rejection_reason') || 'Documents non conformes';
+    } else if (savedStatus === 'approved') {
+      this.showIdVerification = false;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = 'approved';
+    } else if (savedStatus === 'dismissed') {
+      // L'utilisateur a fermé le banner de succès - ne rien afficher
+      this.showIdVerification = false;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = 'none';
+    } else {
+      // Première fois - afficher le popup
+      this.showIdVerification = true;
+      this.showIdReminderBanner = false;
+      this.idVerificationStatus = 'none';
+    }
+  }
+  
+  // Méthode pour rouvrir le popup de vérification
+  reopenIdVerification() {
+    this.showIdReminderBanner = false;
+    this.showIdVerification = true;
+  }
+  
+  // Méthode pour fermer définitivement le banner (plus tard)
+  dismissReminderBanner() {
+    this.showIdReminderBanner = false;
+    // Optionnel : marquer comme "remind_later" dans localStorage
+  }
+  
+  // Méthode pour relancer la vérification après un rejet
+  restartVerification() {
+    // Nettoyer les statuts précédents
+    localStorage.removeItem('id_verification_status');
+    localStorage.removeItem('rejection_reason');
+    
+    // Réinitialiser les propriétés
+    this.idVerificationStatus = 'none';
+    this.rejectionReason = '';
+    this.showIdVerification = true;
+    this.showIdReminderBanner = false;
+  }
+  
+  // Méthode pour fermer le banner de succès
+  dismissSuccessBanner(event?: Event) {
+    // Empêcher la propagation de l'événement pour éviter les conflits
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    
+    this.idVerificationStatus = 'none';
+    localStorage.setItem('id_verification_status', 'dismissed');
+    console.log('Banner de succès fermé par l\'utilisateur');
+  }
 
 }

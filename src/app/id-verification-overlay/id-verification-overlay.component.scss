@@ -42,43 +42,81 @@
   }
 }
 
+// Header de l'overlay avec dégradé Dioko
 .overlay-header {
-  background: var(--ion-color-primary, #3880ff);
-  color: var(--ion-color-primary-contrast, #fff);
-  padding: 16px 20px;
-  border-radius: 16px 16px 0 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 120px;
+}
+
+.header-logo {
+  margin-bottom: 15px;
+}
+
+.dioko-logo {
+  width: 50px;
+  height: 50px;
+  background: #EE7160;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 60px;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(238, 113, 96, 0.4);
+}
+
+.logo-text {
+  color: white;
+  font-family: 'avnext', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .overlay-title {
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
+  font-family: 'avnext', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .overlay-icon {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-right: 8px;
-  color: var(--ion-color-primary-contrast, #fff);
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .overlay-close {
-  background: none;
-  border: none;
-  color: var(--ion-color-primary-contrast, #fff);
-  font-size: 0.9rem;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-.overlay-close:hover {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+  
+  ion-icon {
+    font-size: 18px;
+  }
 }
 
 .overlay-content {
@@ -93,84 +131,206 @@
   line-height: 1.4;
 }
 
+// Formulaire de l'overlay
 .overlay-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
-.overlay-label {
+// Sections d'upload (identiques au modal)
+.upload-section {
+  background: #f8f9ff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 2px dashed #e0e7ff;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: #667eea;
+    background: #f3f4ff;
+  }
+}
+
+.upload-header {
   display: flex;
   align-items: center;
+  margin-bottom: 12px;
   gap: 10px;
-  font-weight: 500;
-  color: var(--ion-text-color, #333);
-  background: var(--ion-item-background, #f6f8fa);
+}
+
+.upload-icon {
+  width: 35px;
+  height: 35px;
+  background: #667eea;
   border-radius: 8px;
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 0.9rem;
-  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: white;
 }
 
-.overlay-label:hover {
-  background: var(--ion-color-light-tint, #e8f0fe);
-}
-
-.overlay-label-icon {
-  font-size: 1.4rem;
-  color: var(--ion-color-primary, #3880ff);
-}
-
-.overlay-file {
-  margin-left: 8px;
+.upload-info {
   flex: 1;
-  font-size: 0.8rem;
 }
 
+.upload-title {
+  font-family: 'avnext', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2A4791;
+  margin: 0 0 3px 0;
+}
+
+.upload-subtitle {
+  font-family: 'avnext', sans-serif;
+  font-size: 11px;
+  color: #666;
+  margin: 0;
+}
+
+.upload-area {
+  position: relative;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+  
+  &:hover {
+    border-color: #667eea;
+    background: #fafbff;
+  }
+  
+  &.has-file {
+    border-color: #27ae60;
+    background: #f0fff4;
+  }
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.upload-cloud-icon {
+  font-size: 28px;
+  color: #667eea;
+  transition: color 0.3s ease;
+}
+
+.upload-text {
+  font-family: 'avnext', sans-serif;
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  
+  &.selected {
+    color: #27ae60;
+    font-weight: bold;
+  }
+}
+
+// Bouton de soumission de l'overlay
 .overlay-submit {
   width: 100%;
-  background: linear-gradient(90deg, var(--ion-color-primary, #3880ff) 60%, var(--ion-color-secondary, #4bcffa) 100%);
-  color: var(--ion-color-primary-contrast, #fff);
+  background: linear-gradient(135deg, #EE7160 0%, #667eea 100%);
+  color: white;
   border: none;
-  border-radius: 8px;
-  padding: 14px 0;
-  font-size: 1rem;
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-family: 'avnext', sans-serif;
+  font-size: 14px;
   font-weight: bold;
   margin-top: 8px;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(56, 128, 255, 0.08);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(238, 113, 96, 0.3);
   min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  
+  &:hover:not([disabled]) {
+    background: linear-gradient(135deg, #d85a47 0%, #5a6fd8 100%);
+    box-shadow: 0 6px 20px rgba(238, 113, 96, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
 }
 
-.overlay-submit:hover:not([disabled]) {
-  background: linear-gradient(90deg, var(--ion-color-primary-shade, #2563eb) 60%, var(--ion-color-secondary-tint, #38bdf8) 100%);
-  box-shadow: 0 4px 16px rgba(56, 128, 255, 0.12);
+.submit-icon {
+  font-size: 16px;
 }
 
-.overlay-submit[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
+.loading-spinner {
+  font-size: 16px;
+  animation: spin 1s linear infinite;
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Messages de l'overlay
 .overlay-error {
-  color: var(--ion-color-danger, #e74c3c);
-  background: var(--ion-color-danger-tint, #fdecea);
-  border-radius: 6px;
-  padding: 10px 12px;
-  text-align: center;
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e74c3c;
+  background: linear-gradient(135deg, #fdecea 0%, #fdf2f2 100%);
+  border: 1px solid #f8d7da;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'avnext', sans-serif;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.1);
+}
+
+.error-icon {
+  font-size: 16px;
+  color: #e74c3c;
 }
 
 .overlay-success {
-  color: var(--ion-color-success, #27ae60);
-  background: var(--ion-color-success-tint, #eafaf1);
-  border-radius: 6px;
-  padding: 10px 12px;
-  text-align: center;
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #27ae60;
+  background: linear-gradient(135deg, #eafaf1 0%, #f0fff4 100%);
+  border: 1px solid #d4edda;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'avnext', sans-serif;
+  font-size: 12px;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.1);
+}
+
+.success-icon {
+  font-size: 16px;
+  color: #27ae60;
 }
 
 @media (max-width: 500px) {

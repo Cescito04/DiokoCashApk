@@ -9,10 +9,21 @@ import { Transfert } from "./request.model";
 })
 
 export class RequestService{
-    apiUrl = 'https://privacy.diokocash.com/api';
+    apiUrl = 'http://127.0.0.1:8000/api';
     version = 1;
 
     constructor(private http: HttpClient){}
+    
+    // Nouvelle méthode pour vérifier le statut de vérification d'identité
+    checkIdVerificationStatus(): Observable<any> {
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        });
+        
+        return this.http.get(`${this.apiUrl}/id-verification-status`, { headers });
+    }
 
     //debit ==service du compte à debiter
     //provenance == telephone compte a debiter

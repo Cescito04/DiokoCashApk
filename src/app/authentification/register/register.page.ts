@@ -137,6 +137,9 @@ export class RegisterPage implements OnInit {
             const authCheck = this.auth.check_auth();
             if (authCheck) {
               authCheck.subscribe((user: any) => {
+                // Reset des statuts ID pour tout nouveau compte
+                localStorage.removeItem('id_verification_status');
+                localStorage.removeItem('rejection_reason');
                 localStorage.setItem('user', JSON.stringify(user));
                 loading.dismiss();
                 this.router.navigateByUrl('/home');
